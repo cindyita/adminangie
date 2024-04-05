@@ -1,0 +1,20 @@
+{
+    "name": "theblux/cindyita",
+    "authors": [
+        {
+            "name": "cindyita"
+        }
+    ],
+    "require": {
+        "bramus/router": "^1.6",
+        "vlucas/phpdotenv": "^5.6",
+        "phpmailer/phpmailer": "^6.8",
+        "firebase/php-jwt": "^6.10"
+    },
+    "autoload": {
+        "psr-4": {
+            "ControllersNS\\": "src/controllers",
+            "ModelsNS\\": "src/models"
+        }
+    }
+}

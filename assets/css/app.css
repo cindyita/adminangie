@@ -1,0 +1,49 @@
+/*----------INITIALIZE STYLES----------*/
+
+* {
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    transition: 0.3s ease;
+}
+body {
+    position:relative;
+}
+body,html {
+    width: 100%;
+    height: 100vh;
+}
+li{
+    list-style: none;
+    margin:0;
+    padding:0;
+}
+a {
+    cursor: pointer;
+}
+a,nav a,li span,td a {
+    text-decoration: none;
+}
+
+/*------------------------------------*/
+/*------------------------------------*/
+/*------------------------------------*/
+
+/*----Loading-----*/
+
+.page-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    z-index: 3;
+}
+.page-overlay .content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

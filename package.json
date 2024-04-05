@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "sass": "sass assets/css/theme.scss assets/css/theme.css"
+  },
+  "dependencies": {
+    "bulma": "^1.0.0",
+    "jquery": "^3.7.1"
+  },
+  "devDependencies": {
+    "sass": "^1.74.1"
+  }
+}
