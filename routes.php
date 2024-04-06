@@ -11,7 +11,6 @@ use ControllersNS\PagesController;
 $router->setNamespace('ControllersNS');
 
 PagesController::headerLayout();
-PagesController::menuLayout();
 
 $router->get('/', 'PagesController@home');
 $router->get('/home', 'PagesController@home');

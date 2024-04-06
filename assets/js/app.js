@@ -19,7 +19,8 @@ $(function () {
  * different type such as "success", "warning", or "error" depending on the message being displayed
  */
 function message(text, type = "info") {
-  var html = '<div class="message '+type+'">'+text+'</div>';
+  var types = { "error": "is-danger","info":"is-info","success":"is-success","warning":"is-warning" };
+  var html = '<div class="message"><div class="notification '+types[type]+'"><button class="delete"></button>'+text+'</div></div>';
   var $message = $(html);
   $message.hide().prependTo('body').fadeIn();
   setTimeout(function() {
@@ -208,3 +209,24 @@ function transposeData(modalid, data) {
         }
     }
 }
+
+function minimizePanel() {
+    if (openPanel) {
+        console.log("open panel");
+        localStorage.setItem('panel', 'open');
+        $("#logo").attr("src", "./assets/img/system/logo.png");
+        $("#btn-minpanel").addClass("fa-chevron-left");
+        $("#btn-minpanel").removeClass("fa-chevron-right");
+        $("#menu-primary").removeClass("menu-min");
+        openPanel = false;                
+    } else {
+        console.log("close panel");
+        localStorage.setItem('panel', 'close');
+        $("#logo").attr("src", "./assets/img/system/icon.png");
+        $("#btn-minpanel").addClass("fa-chevron-right");
+        $("#btn-minpanel").removeClass("fa-chevron-left");
+        $("#menu-primary").addClass("menu-min");
+        openPanel = true;
+    }
+}
+minimizePanel();

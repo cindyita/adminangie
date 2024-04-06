@@ -80,6 +80,7 @@ class PagesController
     // PÁGINA HOME
     public static function home() {
         self::checkSession();
+        self::menuLayout();
         self::pageScript('home');
         require_once "./src/views/pages/home.php";
     }

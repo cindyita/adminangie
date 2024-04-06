@@ -240,3 +240,11 @@ function checkCaptcha($response){
 
     return $recaptcha->success;
 }
+
+function component($component){
+    return "./src/views/components/".$component."Component.php";
+}
+
+function activeUrl($page){
+    return "active";
+}

@@ -1,5 +1,4 @@
 $(function () {
-
     sendAjax({ id: 1 }, 'GET').then(
         function (res) {    
             data = JSON.parse(res);

@@ -1,14 +1,10 @@
-<p>home</p>
-<div id="info"></div>
-<button class="button">Click</button>
-<button class="button is-primary">Primary</button>
-
-<div class="dropdown">
+<div class="dropdown is-right" class="menuSecondary-mobile">
   <div class="dropdown-trigger">
-    <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3">
-      <span>Click me</span>
-      <span class="icon is-small">
-        <i class="fas fa-angle-down" aria-hidden="true"></i>
+    <button aria-haspopup="true" aria-controls="dropdown-menu3">
+      <span>
+        <div class="username">
+            <a href="#" title="Usuario activo"><li><span class="icon-circle"><i class="fa-solid fa-gift"></i></span> <span>Angelita</span></li></a>
+        </div>
       </span>
     </button>
   </div>

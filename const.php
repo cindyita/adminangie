@@ -7,4 +7,5 @@ define("ACTUALPAGE", basename($_SERVER['PHP_SELF']));
 
 define('VIEW', '__view__');
 
-define("VERSION", "0.1.2");
+// define("VERSION", "0.1.3");
+define("VERSION", DATETIME);
