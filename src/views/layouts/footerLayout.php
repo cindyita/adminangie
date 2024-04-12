@@ -1,7 +1,11 @@
 </div> <!--END CONTENT-->
 </div> <!--End main-->
-<script src="https://kit.fontawesome.com/e0df5df9e9.js" crossorigin="anonymous"></script>
-<script src="assets/js/app.js?version=<?php echo VERSION; ?>"></script>
+<script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="./assets/required/metisMenu/metisMenu.min.js"></script>
+<script src="./assets/required/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="./assets/required/dataTables/datatables.min.js" defer></script>
+
+<script src="./assets/js/app.js?version=<?php echo VERSION; ?>"></script>
 <?php 
     if($scripts){
         foreach ($scripts as $value) {

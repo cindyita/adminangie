@@ -14,6 +14,8 @@ PagesController::headerLayout();
 
 $router->get('/', 'PagesController@home');
 $router->get('/home', 'PagesController@home');
+$router->get('/users', 'PagesController@users');
+
 $router->get('/session', 'PagesController@session');
 $router->get('/login', 'PagesController@login');
 $router->get('/logout', 'PagesController@logout');

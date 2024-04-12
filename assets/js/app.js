@@ -1,12 +1,11 @@
-/* The code is initializing two constants `ACTUALPAGE` and `CONTROLLER` by calling the functions `actualPage()` and `pageController()` respectively. */
 const ACTUALPAGE = actualPage();
 const CONTROLLER = pageController();
 
-/* The code is using jQuery to select all elements with the class "page-overlay" and then calling the
-`fadeOut()` method on them. This code is likely intended to fade out any elements with the
-"page-overlay" class when the document is ready or when the DOM has finished loading. */
+
 $(function () {
+  $('.page-container').addClass('sbar_collapsed');
   $(".page-overlay").fadeOut();
+  initTable();
 });
 
 /**
@@ -210,23 +209,29 @@ function transposeData(modalid, data) {
     }
 }
 
-function minimizePanel() {
-    if (openPanel) {
-        console.log("open panel");
-        localStorage.setItem('panel', 'open');
-        $("#logo").attr("src", "./assets/img/system/logo.png");
-        $("#btn-minpanel").addClass("fa-chevron-left");
-        $("#btn-minpanel").removeClass("fa-chevron-right");
-        $("#menu-primary").removeClass("menu-min");
-        openPanel = false;                
-    } else {
-        console.log("close panel");
-        localStorage.setItem('panel', 'close');
-        $("#logo").attr("src", "./assets/img/system/icon.png");
-        $("#btn-minpanel").addClass("fa-chevron-right");
-        $("#btn-minpanel").removeClass("fa-chevron-left");
-        $("#menu-primary").addClass("menu-min");
-        openPanel = true;
-    }
+function initTable() {
+  $('.table').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'colvis',
+                text: '<i class="fas fa-columns"></i>',
+                titleAttr: 'Visibilidad de Columnas'
+            },
+            {
+                extend: 'excel',
+                text: '<i class="fas fa-file-excel"></i>',
+                titleAttr: 'Exportar a Excel'
+            },
+            {
+                extend: 'print',
+                text: '<i class="fas fa-print"></i>',
+                titleAttr: 'Imprimir'
+            }
+        ],
+        order: [[0, 'desc']],
+        language: {
+            url: './assets/required/dataTables/es-MX.json'
+        }
+    });
 }
-minimizePanel();

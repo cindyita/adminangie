@@ -7,9 +7,6 @@ if (!empty(getView())) {
         case 'CHECKEMAIL':
             checkExistEmail();
         break;
-        case 'CHECKUSERNAME':
-            checkExistUsername();
-        break;
         case 'REGISTER':
             register();
         break;
@@ -22,21 +19,8 @@ if (!empty(getView())) {
 function checkExistEmail() {
     $data = getPostData();
     $db = new QueryModel();
-    if (!empty($data) && count($data)>0) {
-        $row = $db->queryUnique("SELECT email FROM users WHERE email=:email",[":email"=>$data['email']]);
-        $response = json_encode($row);
-    } else {
-        $response = json_encode(['error'=>'Invalid format or no info']);
-    }
-    $db->close();
-    echo json_encode($response);
-}
-
-function checkExistUsername() {
-    $data = getPostData();
-    $db = new QueryModel();
-    if (!empty($data) && count($data)>0) {
-        $row = $db->queryUnique("SELECT username FROM users WHERE username=:username",[":username"=>$data['username']]);
+    if (!empty($data)) {
+        $row = $db->queryUnique("SELECT email FROM sys_users WHERE email=:email",[":email"=>$data['email']]);
         $response = json_encode($row);
     } else {
         $response = json_encode(['error'=>'Invalid format or no info']);
@@ -50,10 +34,10 @@ function register(){
     // if(checkCaptcha($data['g-recaptcha-response']) == true){
         $db = new QueryModel();
         if (!empty($data) && count($data)>0) {
-            $row = $db->query("INSERT INTO users(username,email,password) VALUES (:username,:email,:pass)",[":username"=>$data['username'],":email"=>$data['email'],":pass"=>md5($data['pass'])]);
+            $row = $db->query("INSERT INTO sys_users(name,email,password) VALUES (:name,:email,:pass)",[":name"=>$data['name'],":email"=>$data['email'],":pass"=>md5($data['pass'])]);
             $response = json_encode($row);
             if($response){
-                sendEmail($data['email'],$data['username'],"Welcome","welcome to the page, you have successfully registered");
+                sendEmail($data['email'],$data['name'],"Bienvenid@ a Angie","Te has registrado correctamente");
             }
         } else {
             $response = json_encode(['error'=>'Invalid format or no info']);

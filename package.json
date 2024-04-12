@@ -3,7 +3,7 @@
     "sass": "sass assets/css/theme.scss assets/css/theme.css"
   },
   "dependencies": {
-    "bulma": "^1.0.0",
+    "bootstrap": "^5.3.3",
     "jquery": "^3.7.1"
   },
   "devDependencies": {

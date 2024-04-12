@@ -19,10 +19,6 @@ class PagesController
         require_once "./src/views/layouts/headerLayout.php";
     }
 
-    public static function menuLayout() {
-        require_once "./src/views/layouts/menuLayout.php";
-    }
-
     public static function footerLayout() {
         $scripts = self::$scripts;
         require_once "./src/views/layouts/footerLayout.php";
@@ -77,12 +73,25 @@ class PagesController
         require_once "./src/views/pages/unauthorized.php";
     }
 
+    public static function menuLayout($page = "") {
+        self::addScript('./assets/js/menu.js');
+        require_once "./src/views/layouts/menuLayout.php";
+    }
+
     // PÁGINA HOME
     public static function home() {
         self::checkSession();
-        self::menuLayout();
+        self::menuLayout('home');
         self::pageScript('home');
         require_once "./src/views/pages/home.php";
+    }
+
+    // PÁGINA USERS
+    public static function users() {
+        self::checkSession();
+        self::menuLayout('users');
+        self::pageScript('users');
+        require_once "./src/views/pages/users.php";
     }
 
     // PÁGINA LOGIN

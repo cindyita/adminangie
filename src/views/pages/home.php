@@ -1,28 +1,36 @@
-<p>home</p>
-<div id="info"></div>
-<button class="button">Click</button>
-<button class="button is-primary">Primary</button>
 
-<div class="dropdown">
-  <div class="dropdown-trigger">
-    <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3">
-      <span>Click me</span>
-      <span class="icon is-small">
-        <i class="fas fa-angle-down" aria-hidden="true"></i>
-      </span>
-    </button>
-  </div>
-  <div class="dropdown-menu" id="dropdown-menu3" role="menu">
-    <div class="dropdown-content">
-      <a href="#" class="dropdown-item"> Overview </a>
-      <a href="#" class="dropdown-item"> Modifiers </a>
-      <a href="#" class="dropdown-item"> Grid </a>
-      <a href="#" class="dropdown-item"> Form </a>
-      <a href="#" class="dropdown-item"> Elements </a>
-      <a href="#" class="dropdown-item"> Components </a>
-      <a href="#" class="dropdown-item"> Layout </a>
-      <hr class="dropdown-divider" />
-      <a href="#" class="dropdown-item"> More </a>
-    </div>
-  </div>
+<div class="d-flex justify-content-between align-items-center">
+  <h3>Escritorio</h3>
+  <button class="btn btn-primary">Agregar</button>
+</div>
+<div id="info"></div>
+
+
+<div class="p-2">         
+  <table class="table table-striped table-bordered">
+    <thead class="table-primary">
+      <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>john@example.com</td>
+      </tr>
+      <tr>
+        <td>Mary</td>
+        <td>Moe</td>
+        <td>mary@example.com</td>
+      </tr>
+      <tr>
+        <td>July</td>
+        <td>Dooley</td>
+        <td>july@example.com</td>
+      </tr>
+    </tbody>
+  </table>
 </div>

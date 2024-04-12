@@ -17,7 +17,7 @@ class AuthController
                 $db = new QueryModel();
                 $email = $data['email'];
                 $pass = md5($data['pass']);
-                $row = $db->unique("users","email = '$email'");
+                $row = $db->unique("sys_users","email = '$email'");
                 if($row && $row != [] && $pass == $row['password']){
 
                     session_start();
@@ -108,7 +108,7 @@ class AuthController
         }
         $id = $info->data;
         $db = new QueryModel();
-        $row = $db->value("users","id = $id","id");
+        $row = $db->value("sys_users","id = $id","id");
         return $row;
     }
 

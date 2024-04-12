@@ -13,37 +13,46 @@
 
     <!-- Dark/light theme -->
     <script defer>
-        // DARK/LIGHT THEME
         var themeDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    
+
+        function applyTheme(dark) {
+            if (dark) {
+                document.documentElement.setAttribute("data-theme", "dark");
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.documentElement.removeAttribute("data-theme");
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        function toggleTheme() {
+            const currentTheme = localStorage.getItem("theme");
+            if (currentTheme === 'dark') {
+                applyTheme(false);
+            } else {
+                applyTheme(true);
+            }
+        }
+
         if (localStorage.getItem("theme") === 'dark') {
             themeDark = true;
         } else if (localStorage.getItem("theme") === 'light') {
             themeDark = false;
         }
         
-        function toggleTheme() {
-            if (themeDark) {
-                localStorage.setItem('theme', 'dark');
-                document.documentElement.setAttribute("data-theme", "dark");
-                themeDark = false;
-            } else {
-                localStorage.setItem('theme', 'light');
-                document.documentElement.setAttribute("data-theme", "light");
-                themeDark = true;
-            }
-        }
-        toggleTheme();
-        // OPEN/CLOSE PANEL
-        var openPanel = true;
-        if (localStorage.getItem("panel") === 'open') {
-            openPanel = true;
-        } else if (localStorage.getItem("panel") === 'close') {
-            openPanel = false;
-        }
+        applyTheme(themeDark);
+        
     </script>
 
-    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/required/dataTables/datatables.min.css">
+
+    <link rel="stylesheet" href="./assets/required/metisMenu/metisMenu.css">
+    <link rel="stylesheet" href="./assets/required/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="./assets/required/fontawesome/css/brands.min.css">
+    <link rel="stylesheet" href="./assets/required/fontawesome/css/solid.min.css">
 
     <link rel="stylesheet" href="./assets/css/app.css?version=<?php echo VERSION; ?>">
     <link rel="stylesheet" href="./assets/css/theme.css?version=<?php echo VERSION; ?>">
@@ -56,8 +65,6 @@
         }
     ?>
 
-    <link rel="stylesheet" href="node_modules/bulma/css/bulma.min.css">
-
 </head>
 <body>
 
@@ -68,4 +75,4 @@
     </div>
 </div>
 
-<div class="main">
+<div class="main page-container">
