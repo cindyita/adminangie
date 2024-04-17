@@ -15,27 +15,42 @@ class AuthController
     
             if (!empty($data) && count($data)>0) {
                 $db = new QueryModel();
+                
                 $email = $data['email'];
-                $pass = md5($data['pass']);
                 $row = $db->unique("sys_users","email = '$email'");
-                if($row && $row != [] && $pass == $row['password']){
+                if($row && $row != [] && password_verify($data['pass'], $row['password'])){
 
-                    session_start();
+                    if($row['status'] != 1){
+                        return 3;
+                    }
+
+                    // session_start();
 
                     foreach ($row as $key => $value) {
                         if($key != "password"){
                             $_SESSION['MYSESSION'][$key] = $value;
                         }
                     }
+
                     $id = $row['id'];
                     $_SESSION['MYSESSION']['userid'] = $id;
+                    
+                    $idCompany = $row['id_company'];
+                    $company = $db->unique("sys_company","id = $idCompany");
+                    $_SESSION['MYSESSION']['company'] = [];
+
+                    foreach ($company as $key => $value) {
+                        if($key != "register_password"){
+                            $_SESSION['MYSESSION']['company'][$key] = $value;
+                        }
+                    }
 
                     $token = self::generateToken($id);
 
                     setcookie('AuthToken', $token, [
                         'expires' => time() + 60*60*24*30, // 30 días
                         'path' => '/',
-                        // 'domain' => 'tudominio.com',
+                        // 'domain' => $_ENV['DOMAIN'],
                         'secure' => true,
                         'httponly' => true,
                         'samesite' => 'Lax'
@@ -45,7 +60,7 @@ class AuthController
                     if($token){
                         return 1;
                     }else{
-                        return "Error in token";
+                        return 4;
                     }
                     
                 }else{

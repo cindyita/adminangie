@@ -11,7 +11,7 @@ if (!empty(getView())) {
             register();
         break;
         default:
-            echo "No action defined";
+            echo json_encode("No se definió una acción");
         break;
     }
 }
@@ -34,11 +34,19 @@ function register(){
     // if(checkCaptcha($data['g-recaptcha-response']) == true){
         $db = new QueryModel();
         if (!empty($data) && count($data)>0) {
-            $row = $db->query("INSERT INTO sys_users(name,email,password) VALUES (:name,:email,:pass)",[":name"=>$data['name'],":email"=>$data['email'],":pass"=>md5($data['pass'])]);
-            $response = json_encode($row);
-            if($response){
-                sendEmail($data['email'],$data['name'],"Bienvenid@ a Angie","Te has registrado correctamente");
+
+            $key = password_hash($data['registerKey'], PASSWORD_DEFAULT);
+            $idCompany = $db->value("sys_company","register_password = '$key'","id");
+
+            if(empty($idCompany) || !$idCompany || $idCompany == []){
+                return 5;
             }
+            $pass = password_hash($data['pass'], PASSWORD_DEFAULT);
+            $row = $db->query("INSERT INTO sys_users(name,email,password,id_company) VALUES (:name,:email,:pass,:id_company)",[":name"=>$data['name'],":email"=>$data['email'],":pass"=> $pass,":id_company"=>$idCompany]);
+            $response = json_encode($row);
+            // if($response){
+            //     sendEmail($data['email'],$data['name'],"Bienvenid@ a Angie","Te has registrado correctamente");
+            // }
         } else {
             $response = json_encode(['error'=>'Invalid format or no info']);
         }

@@ -1,6 +1,5 @@
 <?php
-session_start();
-ob_start();
+
 date_default_timezone_set('America/Mexico_City');
 setlocale(LC_TIME, 'es_ES.UTF-8');
 
@@ -15,11 +14,14 @@ PagesController::headerLayout();
 $router->get('/', 'PagesController@home');
 $router->get('/home', 'PagesController@home');
 $router->get('/users', 'PagesController@users');
+$router->get('/settings', 'PagesController@settings');
 
-$router->get('/session', 'PagesController@session');
+
 $router->get('/login', 'PagesController@login');
 $router->get('/logout', 'PagesController@logout');
 $router->get('/register', 'PagesController@register');
+
+$router->get('/unauth', 'PagesController@unAuth');
 
 $router->set404('PagesController@error404');
 

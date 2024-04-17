@@ -3,6 +3,7 @@
         <div class="img-404">
             <img src="./assets/img/system/img404.png" alt="error404">
         </div>
-        <h1>404 PAGE NOT FOUND</h1>
+        <h1>404 PÁGINA NO ENCONTRADA</h1>
+        <a href="home"><button class="btn btn-primary">Regresar a inicio</button></a>
     </div>
 </div>

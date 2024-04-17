@@ -4,7 +4,9 @@
         <div class="sidebar-menu">
             <div class="sidebar-header">
                 <div class="logo">
-                    <a href="index.html"><img src="assets/img/system/logo.png" alt="logo"></a>
+                    <a href="home">
+                        <img src="<?php echo $_SESSION['MYSESSION'] ? './assets/img/company/'.$_SESSION['MYSESSION']['company']['id'].'/'.$_SESSION['MYSESSION']['company']['img_logo'] : "./assets/img/system/logo.png"; ?>" alt="logo">
+                    </a>
                 </div>
             </div>
             <div class="main-menu">
@@ -48,10 +50,7 @@
                                 <img src="assets/img/system/user.avif" alt="User profile">
                             </div>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#"><i class="fa-solid fa-user"></i> Perfil</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="fa-solid fa-gear"></i> Ajustes</a></li>
-                                <li><hr class="dropdown-divider"></hr></li>
-                                <li><a href="logout" class="dropdown-item"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a></li>
+                                <?php require_once(component("menuUser")); ?>
                             </ul>
                         </div>
                         

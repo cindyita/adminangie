@@ -3,7 +3,9 @@
     <div class="text-center box">
         <div class="w-100 d-flex justify-content-center">
             <div class="logo">
-                <a href="index.html"><img src="assets/img/system/logo.png" alt="logo"></a>
+                <a href="home">
+                    <img src="assets/img/system/logo.png" alt="logo">
+                </a>
             </div>
         </div>
         

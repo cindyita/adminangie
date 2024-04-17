@@ -8,8 +8,10 @@
     <meta property="locale" content="en_EN" />
 	<meta property="title" content="" />
     <meta property="site_name" content="" />
-    <title>admin ANGIE</title>
-    <link rel="shortcut icon" href="./assets/img/system/favicon.png" type="image/PNG">
+    <title><?php echo $_SESSION['MYSESSION']['company']['app_title'] ?? "Admin"; ?></title>
+
+    <link rel="shortcut icon" href="<?php echo $_SESSION && $_SESSION['MYSESSION']['company']['img_favicon'] ? './assets/img/company/'.$_SESSION['MYSESSION']['company']['id'].'/'.$_SESSION['MYSESSION']['company']['img_favicon'] : "./assets/img/system/favicon.png"; ?>" type="image/PNG">
+    <!-- <link rel="shortcut icon" href="./assets/img/system/favicon.png" type="image/PNG"> -->
 
     <!-- Dark/light theme -->
     <script defer>
@@ -43,6 +45,32 @@
         applyTheme(themeDark);
         
     </script>
+    <?php if(isset($_SESSION['MYSESSION']) && $_SESSION['MYSESSION']['company']){ ?>
+    <style>
+        :root {
+            --primary: <?php echo $_SESSION['MYSESSION']['company']['primary_color'] ?? "#213F75"; ?>;
+            --secondary: <?php echo $_SESSION['MYSESSION']['company']['secondary_color'] ?? "#A368ED"; ?>;
+            --tertiary: <?php echo $_SESSION['MYSESSION']['company']['tertiary_color'] ?? "#F773CC"; ?>;
+            --accent: <?php echo $_SESSION['MYSESSION']['company']['accent_color'] ?? "#74d7ff"; ?>;
+        }
+        .font1 {
+            background-image: url(<?php echo $_SESSION['MYSESSION']['company']['img_font'] ? "assets/img/company/".$_SESSION['MYSESSION']['company']['id']."/".$_SESSION['MYSESSION']['company']['img_font'] : "assets/img/system/font.jpg"; ?>);
+            background-position: center center;
+            background-size: cover;
+        }
+
+    </style>
+    <?php }else{ ?>
+    <style>
+        :root {
+            --primary: #213F75;
+            --secondary: #A368ED;
+            --tertiary: #F773CC;
+            --accent: #74d7ff;
+            --urlFont: "../img/system/font.jpg";
+        }
+    </style>
+    <?php } ?>
 
     <script src="./node_modules/jquery/dist/jquery.min.js"></script>
 

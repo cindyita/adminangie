@@ -89,23 +89,23 @@ function getParam(string $param, string $def='') {
  * Otherwise, a custom method is used to create a GUID by combining various elements like `md5`,
  * `uniqid
  */
-function getGUID(){
-    if (function_exists('com_create_guid')){
-        return com_create_guid();
-    } else {
-        mt_srand((double)microtime()*10000);
-        $charid = strtoupper(md5(uniqid(rand(), true)));
-        $hyphen = chr(45);// "-"
-        $uuid = chr(123)// "{"
-        .substr($charid, 0, 8).$hyphen
-        .substr($charid, 8, 4).$hyphen
-        .substr($charid,12, 4).$hyphen
-        .substr($charid,16, 4).$hyphen
-        .substr($charid,20,12)
-        .chr(125);// "}"
-        return $uuid;
-    }
-}
+// function getGUID(){
+//     if (function_exists('com_create_guid')){
+//         return com_create_guid();
+//     } else {
+//         mt_srand((double)microtime()*10000);
+//         $charid = strtoupper(md5(uniqid(rand(), true)));
+//         $hyphen = chr(45);// "-"
+//         $uuid = chr(123)// "{"
+//         .substr($charid, 0, 8).$hyphen
+//         .substr($charid, 8, 4).$hyphen
+//         .substr($charid,12, 4).$hyphen
+//         .substr($charid,16, 4).$hyphen
+//         .substr($charid,20,12)
+//         .chr(125);// "}"
+//         return $uuid;
+//     }
+// }
 
 /**
  * The getRandomString function generates a random string of a specified length using a combination of
@@ -245,6 +245,60 @@ function component($component){
     return "./src/views/components/".$component."Component.php";
 }
 
-function activeUrl($page){
-    return "active";
+function activeUrl($pageMenu,$pageActual = "home"){
+    if($pageMenu == $pageActual){
+        return "active";
+    }
+    return;
+}
+
+function createFile($campo,$ruta,$nameFile = "",$reemplazar = 1) {
+    try{
+        if (isset($_FILES[$campo]) && $_FILES[$campo]['error'] === UPLOAD_ERR_OK){
+
+            $datetime = date('Y-m-d H:i:s');
+            $timestamp = strtotime($datetime);
+            $dateNumber = preg_replace('/[^0-9]/', '', strval($timestamp));
+
+            $originalFileName = $_FILES[$campo]['name'];
+            $extension = strtolower(pathinfo($originalFileName, PATHINFO_EXTENSION));
+            $nameFile = $nameFile ? $nameFile.'.'.$extension : $originalFileName;
+            $type = $_FILES[$campo]['type'];
+            // $size = $_FILES[$campo]['size'];
+            $temp = $_FILES[$campo]['tmp_name'];
+
+            $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif']; // Extensiones permitidas
+            $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif']; // Tipos MIME permitidos
+
+            if (!in_array($extension, $allowedExtensions)) {
+                return 6;
+            }
+
+            if (!in_array($type, $allowedMimeTypes)) {
+                return 6;
+            }
+
+            if (!file_exists($ruta)) {
+                mkdir($ruta, 0777, true);
+            }
+
+            $routeSave = $ruta. $nameFile;
+            if (file_exists($routeSave) && !$reemplazar) {
+                $nameFile = $dateNumber.'_'.$nameFile;
+                $routeSave = $ruta. $nameFile;
+            }
+            $res = move_uploaded_file($temp, $routeSave);
+
+            if($res){
+                return $nameFile;
+            }else{
+                return null;
+            }
+            
+        }else{
+            return null;
+        }
+    }catch(PDOException $e){
+        return "Error en la consulta: " . $e->getMessage();
+    }
 }

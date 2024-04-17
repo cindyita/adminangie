@@ -4,10 +4,6 @@ $(function () {
         checkEmail();
     });
 
-    $("#username").on("focusout", function () {
-        checkUsername();
-    });
-
     $("#pass").on("focusout", function () {
         checkPass();
     });
@@ -19,21 +15,24 @@ $(function () {
     $("#register").on("submit", async function (event) {
         event.preventDefault();
         var emailValid = await checkEmail();
-        var usernameValid = await checkUsername();
         var pass = checkPass();
         var cpass = checkCPass();
         var formData = new FormData($("#register")[0]);
-        if (emailValid && usernameValid && pass && cpass) {
+        if (emailValid && pass && cpass) {
             sendAjaxForm(formData, 'REGISTER').then(
                 function (res) {
-                    message("You have successfully registered", "success");
-                    $("#register")[0].reset();
+                    if (processError(res)) {
+                        message("Te has registrado correctamente", "success");
+                        $("#register")[0].reset();
+                        var myModal = bootstrap.Modal.getInstance($('#newUser'));
+                        myModal.hide();
+                    }
                 }).catch(function (error) {
-                    message("Something went wrong", "error");
+                    message("Algo salió mal", "error");
                     console.error(error);
             });
         } else {
-            message("Error in fields","error");
+            message("Error en los campos","error");
         }
     });
 
@@ -46,7 +45,7 @@ async function checkEmail() {
         res = JSON.parse(res);
         if (res != "false") {
             console.log("Email error");
-            message("This email is already in use","error");
+            message("Este email ya está en uso","error");
             $("#email").val("");
             return false;
         } else {
@@ -54,27 +53,7 @@ async function checkEmail() {
         }
     } catch (error) {
         console.error(error);
-        message("Something went wrong","error");
-        return false;
-    }
-}
-
-async function checkUsername() {
-    var username = $("#username").val();
-    try {
-        var res = await sendAjax({ username: username }, 'CHECKUSERNAME');
-        res = JSON.parse(res);
-        if (res != "false") {
-            console.log("Username error");
-            message("This username is already in use","error");
-            $("#username").val("");
-            return false;
-        } else {
-            return true;
-        }
-    } catch (error) {
-        console.error(error);
-        message("Something went wrong","error");
+        message("Algo salió mal","error");
         return false;
     }
 }
@@ -82,11 +61,11 @@ async function checkUsername() {
 function checkPass() {
     var pass = $("#pass").val();
     if (!checkPattern(pass)) {
-        var msg = 'Password must contain:<ul>' +
-            '<li>min 8 characters length</li>' +
-            '<li>1 lower case letter</li>' +
-            '<li>1 upper case letter</li>' +
-            '<li>1 numeric character</li>' +
+        var msg = 'La contraseña debe contener:<ul>' +
+            '<li>Longitud mínima de 8 caracteres</li>' +
+            '<li>1 letra minúscula</li>' +
+            '<li>1 letra mayúscula</li>' +
+            '<li>1 número</li>' +
             '</ul>';
         message(msg, "error");
         return false;
@@ -98,7 +77,7 @@ function checkCPass() {
     var pass = $("#pass").val();
     var cpass = $("#cpass").val();
     if (pass != cpass) {
-        message("Passwords must match","error");
+        message("Las contraseñas deben coincidir","error");
         return false;
     }
     return true;

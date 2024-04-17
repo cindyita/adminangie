@@ -3,7 +3,9 @@
     <div class="text-center box">
         <div class="w-100 d-flex justify-content-center">
             <div class="logo">
-                <a href="index.html"><img src="assets/img/system/logo.png" alt="logo"></a>
+                <a href="home">
+                    <img src="<?php echo $_SESSION['MYSESSION'] ? './assets/img/company/'.$_SESSION['MYSESSION']['company']['id'].'/'.$_SESSION['MYSESSION']['company']['img_logo'] : "./assets/img/system/logo.png"; ?>" alt="logo">
+                </a>
             </div>
         </div>
         
@@ -11,28 +13,28 @@
             <h3>Registro</h3>
         </div>
         <form method="post" id="login">
-            <div>
-                <label for="name">Nombre:</label>
-                <input type="text" name="name" id="name" required>
+            <div class="mt-3">
+                <label for="name" class="form-label">Nombre:</label>
+                <input type="text" name="name" id="name" class="form-control" required>
             </div>
-            <div>
-                <label for="email">Email:</label>
-                <input type="email" name="email" id="email" required>
+            <div class="mt-3">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" name="email" id="email" class="form-control" required>
             </div>
-            <div>
-                <label for="pass">Contraseña:</label>
-                <input type="password" name="pass" id="pass" required>
+            <div class="mt-3">
+                <label for="pass" class="form-label">Contraseña:</label>
+                <input type="password" name="pass" id="pass" class="form-control" required>
             </div>
-            <div>
-                <label for="cpass">Confirmación de contraseña:</label>
-                <input type="password" id="cpass" required>
+            <div class="mt-3">
+                <label for="cpass" class="form-label">Confirmación de contraseña:</label>
+                <input type="password" id="cpass" class="form-control" required>
             </div>
-            <div>
-                <label for="registerKey">Clave de registro:</label>
-                <input type="number" id="registerKey" required>
+            <div class="mt-3">
+                <label for="registerKey" class="form-label">Clave de registro:</label>
+                <input type="number" id="registerKey" name="registerKey" class="form-control" required>
             </div>
-            <div>
-                <button type="submit">Registrarse</button>
+            <div class="mt-3">
+                <button type="submit" class="btn btn-secondary">Registrarse</button>
             </div>
         </form>
     </div>

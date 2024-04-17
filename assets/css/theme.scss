@@ -1,25 +1,27 @@
 
 /*----------VARIABLES----------*/
+
 :root {
-    --primary: #213F75;
-    --primaryFont: #2275bd;
-    --secondary: #A368ED;
-    --tertiary: #F773CC;
-    --accent: #74d7ff;
+    // --primary: #213F75;
+    // --secondary: #A368ED;
+    // --tertiary: #F773CC;
+    // --accent: #74d7ff;
     --fontHeader: "roboto";
     --fontText: "roboto";
-    --menu: #213f75;
     --text: black;
     --font: white;
     --fontSecondary: #f3f5f7;
     --radius: 25px;
+    --bs-danger-bg-subtle: red;
+    --bs-success-bg-subtle: lightgreen;
+    --bs-info-bg-subtle: lightblue;
+    --bs-warning-bg-subtle: yellow;
 }
 // @media (prefers-color-scheme: dark) {
 //   :root {
 //     --text: white;
 //     --font: #14161A;
 //     --fontSecondary: #24282e;
-//     --primaryFont: white;
 //   }
 // }
 
@@ -92,7 +94,7 @@
     z-index: 3;
     color: white;
     background-color: var(--primary);
-    border-color: var(--primary);
+    border-color: lightgrey;
     font-size: 10pt;
 }
 .table-primary {
@@ -128,7 +130,7 @@
     height: 100vh;
     width: 280px;
     overflow: hidden;
-    background: var(--menu);
+    background: var(--primary);
     -webkit-transition: all 0.3s ease 0s;
     transition: all 0.3s ease 0s;
 }
@@ -296,6 +298,8 @@
     padding-right: 40px;
     letter-spacing: 0;
     border:1px solid lightgrey;
+    background-color: rgba(255,255,255,0.2);
+    color: var(--text);
 }
 
 .search-box input::-webkit-input-placeholder {
@@ -317,7 +321,7 @@
     font-size: 14px;
     color: #bbbcc9;
 }
-/*-----USER---*/
+/*-----USER----*/
 .img-profile {
   max-height: 100%;
   width: 50px;
@@ -418,7 +422,7 @@ a .text-secondary:hover i{
   position: fixed;
   top:10px;
   width: 100%;
-  z-index:9;
+  z-index:99999;
   display: flex;
   justify-content: center;
   .notification {
@@ -460,12 +464,16 @@ a .text-secondary:hover i{
   box-shadow: 1px 1px 10px rgba(0,0,0,0.4);
   border-radius: 25px;
   padding:50px;
+  color: white;
 }
-.font1 {
-  background-image: url("../img/system/font.jpg");
-  background-position: center center;
-  background-size: cover;
+.cursor-pointer {
+  cursor: pointer;
 }
+// .font1 {
+//   background-image: url($urlfont);
+//   background-position: center center;
+//   background-size: cover;
+// }
 @media screen and (max-width: 1200px) {
   .box {
     width: 50%;
@@ -479,19 +487,16 @@ a .text-secondary:hover i{
 }
 /*---------Bootstrap---------*/
 /*--FORM--*/
-.form-control {
+.form-control,.form-select {
     border: 1px solid lightgrey;
     border-radius: var(--radius);
-    color: var(--primary);
-}
-.form-select {
-    border: 1px solid lightgrey;
-    border-radius: var(--radius);
-    color: var(--primary);
+    color: var(--text) !important;
+    background-color: rgba(255,255,255,0.2) !important;
 }
 .form-control:focus, .form-select:focus {
-    border: 1px solid var(--primary);
-    color: var(--primary);
+    border: 1px solid var(--accent);
+    color: var(--text) !important;
+    background-color: rgba(255,255,255,0.2) !important;
 }
 .form-check-input,
 .form-check-input:focus {
@@ -501,14 +506,56 @@ a .text-secondary:hover i{
     background-color: var(--primary);
     border-color: var(--primary);
 }
+.form-select {
+  --bs-form-select-bg-img: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23999999' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+}
+.form-select option {
+  color: black;
+}
 /*--MODAL--*/
 .modal-content {
-    background-color: var(--bs-modal-bg);
-    border: 1 solid lightgrey;
-    border-radius: 25px;
+    background-color: var(--font);
+    border: 1px solid lightgrey;
+    border-radius: var(--radius);
+    color: var(--text);
 }
 .modal-header {
     border: 0;
+}
+.btn-close {
+  --bs-btn-close-bg: "";
+  color:var(--text);
+  font-size:18pt;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modalTable {
+  td,th {
+    background-color: var(--font);
+  }
+}
+/*----------*/
+.alert {
+  padding: 12px 40px 12px 20px;
+  position: relative;
+  border:0;
+  border-radius: var(--radius);
+  .close {
+    background-color: transparent;
+    border:0;
+    position: absolute;
+    right: 15px;
+    top: 13px;
+    &:hover {
+      color: var(--accent);
+    }
+  }
+}
+/*------------*/
+.btn.btn-light2 {
+  background-color: transparent;
+  color: var(--text);
 }
 /*------------LOADER----------*/
 .page-overlay {

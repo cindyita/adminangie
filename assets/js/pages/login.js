@@ -6,18 +6,17 @@ $(function () {
         if ($("#email").val() != "" && $("#pass").val() != "") {
             sendAjaxForm(formData, 'LOGIN').then(
                 function (res) { 
-                    console.log(res);
                     if (processError(res)) {
-                        message("You have logged in successfully", "success");
+                        message("Has iniciado sesión correctamente", "success");
                         $("#login")[0].reset();
                         window.location.href = "home";
                     }
                 }).catch(function (error) {
-                    message("Something went wrong", "error");
+                    message("Algo salió mal", "error");
                     console.error(error);
             });
         } else {
-            message("You must fill out the fields","error");
+            message("Debes llenar todos los campos","error");
         }
     });
 

@@ -9,7 +9,7 @@ if (!empty(getView())) {
             login();
         break;
         default:
-            echo "No action defined";
+            echo json_encode("No se definió una acción");
         break;
     }
 }

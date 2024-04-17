@@ -1,4 +1,6 @@
 <?php 
+session_start();
+ob_start();
 require 'vendor/autoload.php';
 //Cargar variables de entorno
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);

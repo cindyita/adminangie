@@ -56,16 +56,18 @@ class PagesController
         }
     }
 
+    public static function checkIsAdmin(){
+        if($_SESSION["MYSESSION"]['id_role'] != 1){
+            header('Location: unauth');
+            exit();
+        }
+    }
+
     public static function checkSessionToHome(){
         $validate = AuthController::validateAuthToken();
         if($validate && isset($_SESSION["MYSESSION"]) && $validate != "expired"){
             header('Location: home');
         }
-    }
-
-    // VER VARIABLES DE SESSION
-    public static function session() {
-        require_once "./src/views/pages/_session.php";
     }
 
     // PÁGINA NO AUTORIZADO
@@ -91,7 +93,18 @@ class PagesController
         self::checkSession();
         self::menuLayout('users');
         self::pageScript('users');
+        $db = new QueryModel();
+        $roles = $db->select("sys_role");
         require_once "./src/views/pages/users.php";
+    }
+
+    // PÁGINA Settings
+    public static function settings() {
+        self::checkSession();
+        self::checkIsAdmin();
+        self::menuLayout('settings');
+        self::pageScript('settings');
+        require_once "./src/views/pages/settings.php";
     }
 
     // PÁGINA LOGIN

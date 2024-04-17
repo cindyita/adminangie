@@ -17,16 +17,18 @@ $(function () {
  * message being displayed. By default, the type is set to "info", but it can be overridden with a
  * different type such as "success", "warning", or "error" depending on the message being displayed
  */
+var typesAlert = { "error": "alert-danger", "info": "alert-info", "success": "alert-success", "warning": "alert-warning" };
+var typesAlertText = { "error": "Error", "info": "Info", "success": "Éxito", "warning": "Aviso" };
+
 function message(text, type = "info") {
-  var types = { "error": "is-danger","info":"is-info","success":"is-success","warning":"is-warning" };
-  var html = '<div class="message"><div class="notification '+types[type]+'"><button class="delete"></button>'+text+'</div></div>';
+  var html = '<div class="message"><div class="alert alert-dismissible '+typesAlert[type]+'"><button type="button" data-bs-dismiss="alert" class="close"><i class="fa-solid fa-xmark"></i></button><strong>'+typesAlertText[type]+':</strong> '+text+'</div></div>';
   var $message = $(html);
   $message.hide().prependTo('body').fadeIn();
   setTimeout(function() {
       $message.fadeOut(function() {
           $(this).remove();
       });
-  }, 4000);
+  }, 6500);
 }
 
 /**
@@ -43,10 +45,35 @@ function processError(res) {
     case 1:
       return true;
     case 2:
-      message("The email or password is incorrect", "error");
-      console.log("Error 2: The email or password is incorrect");
+      message("El email o la contraseña son incorrectas", "error");
+      console.log("Error 2: El email o la contraseña son incorrectas");
       return false;
+    case 3:
+      message("El usuario está desactivado", "error");
+      console.log("Error 3: El usuario está desactivado");
+      return false;
+    case 4:
+      message("Error en el token de acceso", "error");
+      console.log("Error 4: Error en el token de acceso");
+      return false;
+    case 5:
+      message("La clave de registro es incorrecta", "error");
+      console.log("Error 5: La clave de registro es incorrecta");
+      return false;
+    case 6:
+      message("No se permite ese tipo de archivo", "error");
+      console.log("Error 6: No se permite ese tipo de archivo");
+      return false;
+    case 7:
+      message("No se pudo actualizar", "error");
+      console.log("Error 7: No se pudo actualizar");
+      return false;
+    case 8:
+      message("No tienes los permisos para esta acción", "error");
+      console.log("Error 8: No tienes los permisos para esta acción");
+    return false;
     default:
+      message("Error desconocido", "error");
       console.log("Error: "+res);
       return false;
   }
@@ -227,6 +254,10 @@ function initTable() {
                 extend: 'print',
                 text: '<i class="fas fa-print"></i>',
                 titleAttr: 'Imprimir'
+          },
+            {
+                text: '<a onclick="updateTable()"><i class="fa-solid fa-rotate"></i></a>',
+                titleAttr: 'Actualizar tabla'
             }
         ],
         order: [[0, 'desc']],

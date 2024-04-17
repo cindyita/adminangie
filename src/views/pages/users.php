@@ -7,31 +7,91 @@
 <div id="onTable"></div>
 
 <?php 
-  $newUser = '<div>
-                <form action="/action_page.php">
-                  <div class="mb-3 mt-3">
-                    <label for="name" class="form-label">Nombre:</label>
-                    <input type="text" class="form-control" id="name" placeholder="Ingresa el nombre" name="name">
-                  </div>
-                  <div class="mb-3 mt-3">
-                    <label for="name" class="form-label">Nombre de usuario:</label>
-                    <input type="text" class="form-control" id="name" placeholder="Ingresa el nombre" name="name">
-                  </div>
-                  <div class="mb-3 mt-3">
-                    <label for="email" class="form-label">Email:</label>
-                    <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
-                  </div>
-                  <div class="mb-3">
-                    <label for="pwd" class="form-label">Password:</label>
-                    <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
-                  </div>
-                  <div class="form-check mb-3">
-                    <label class="form-check-label">
-                      <input class="form-check-input" type="checkbox" name="remember"> Remember me
-                    </label>
-                  </div>
-                  <button type="submit" class="btn btn-primary">Submit</button>
+    $rol = "";
+    foreach ($roles as $key => $value) {
+        $rol .= '<option value="'.$value['id'].'">'.$value['name'].'</option>';
+    }
+
+    $newUser = '<div>
+                    <form method="post" id="register">
+                        <div class="mt-3">
+                            <label for="name" class="form-label">Nombre:</label>
+                            <input type="text" name="name" id="name" class="form-control" required>
+                        </div>
+                        <div class="mt-3">
+                            <label for="email" class="form-label">Email:</label>
+                            <input type="email" name="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="mt-3">
+                            <label for="pass" class="form-label">Contraseña:</label>
+                            <input type="password" name="pass" id="pass" class="form-control" required>
+                        </div>
+                        <div class="mt-3">
+                            <label for="cpass" class="form-label">Confirmación de contraseña:</label>
+                            <input type="password" id="cpass" class="form-control" required>
+                        </div>
+                        <div class="mt-3">
+                            <label for="id_role" class="form-label">Rol de usuario:</label>
+                            <select class="form-select" id="id_role" name="id_role" required>
+                                '.$rol.'
+                            </select>
+                        </div>
+                        <div class="mt-3">
+                            <label for="status" class="form-label">Estatus:</label>
+                            <select class="form-select" id="status" name="status" required>
+                                <option value="1">Activo</option>
+                                <option value="0">Inactivo</option>
+                            </select>
+                        </div>
+                        <div class="mt-3">
+                            <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Crear</button>
+                        </div>
+                    </form>
+                </div>';
+ echo modal('newUser', 'Crear nuevo usuario', $newUser);
+
+ $viewUser = '<div id="viewUser-content"></div>';
+ echo modal('viewUser', 'Ver usuario', $viewUser);
+
+$editUser = '<div>
+                <form method="post" id="editUserForm">
+                    <div class="mt-3">
+                        <label for="name" class="form-label">Nombre:</label>
+                        <input type="text" name="name" id="nameEdit" class="form-control" required>
+                    </div>
+                    <div class="mt-3">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="email" name="email" id="emailEdit" class="form-control" required>
+                    </div>
+                    <div class="mt-3">
+                        <label for="id_role" class="form-label">Rol de usuario:</label>
+                        <select class="form-select" name="id_role" id="id_roleEdit" required>
+                            '.$rol.'
+                        </select>
+                    </div>
+                    <div class="mt-3">
+                        <label for="status" class="form-label">Estatus:</label>
+                        <select class="form-select" name="status" id="statusEdit" required>
+                            <option value="1">Activo</option>
+                            <option value="0">Inactivo</option>
+                        </select>
+                    </div>
+                    <input type="hidden" name="id" id="idEdit">
+                    <div class="mt-3">
+                        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Editar</button>
+                    </div>
                 </form>
-              </div>';
- echo modal('newUser', 'Crear nuevo usuario', 'test');
+            </div>';
+ echo modal('editUser', 'Editar usuario', $editUser);
+
+ $deleteUser = '<div>
+                    <h5>¿Segur@ que quieres borrar al usuario con id: <span id="idDeleteText"></span>?</h5>
+                    <form method="post" id="deleteUserForm">
+                        <input type="hidden" name="id" id="idDelete">
+                        <div class="w-100 d-flex justify-content-center pt-3">
+                            <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Eliminar</button>
+                        </div>
+                    </form>    
+                </div>';
+ echo modal('deleteUser', 'Borrar usuario', $deleteUser);
 ?>
