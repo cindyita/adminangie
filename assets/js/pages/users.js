@@ -1,6 +1,6 @@
 $(function () {
 
-    getDataTable();
+    updateTable();
     $("#email").on("focusout", function () {
         checkEmail();
     });
@@ -38,7 +38,7 @@ $(function () {
     $("#editUserForm").on("submit", function (event) {
         event.preventDefault();
         var formData = new FormData($("#editUserForm")[0]);
-        sendAjaxForm(formData, 'EDITUSER').then(
+        sendAjaxForm(formData, 'UPDATE').then(
                 function (res) {
                     console.log(res);
                     if (processError(res)) {
@@ -54,7 +54,7 @@ $(function () {
     $("#deleteUserForm").on("submit", function (event) {
         event.preventDefault();
         var formData = new FormData($("#deleteUserForm")[0]);
-        sendAjaxForm(formData, 'DELETEUSER').then(
+        sendAjaxForm(formData, 'DELETE').then(
                 function (res) {
                     console.log(res);
                     if (processError(res)) {
@@ -74,14 +74,14 @@ function openModal(type,idModal,id) {
         if (type == "view") {
             $("#viewUser-content").html("");
             $("#viewUser-content").html('<div class="spinner-border"></div>');
-            sendAjax({id:id}, 'viewUser').then(
+            sendAjax({id:id}, 'SELECT').then(
                 function (res) {    
                     data = JSON.parse(res);
                     html = `<table class="table modalTable">
                                 <tbody>
                                     <tr>
                                         <th>Imagen</th>
-                                        <td><img src="./assets/img/user/`+data['img']+`" onerror="this.src = './assets/img/system/user.avif'" loading="lazy" width="100px"></td>
+                                        <td><a href="./assets/img/user/`+data['img']+`" target="_blank"><img src="./assets/img/user/`+data['img']+`" onerror="this.src = './assets/img/system/user.avif'" loading="lazy" width="100px"></a></td>
                                     </tr>
                                     <tr>
                                         <th>Id</th>
@@ -138,12 +138,8 @@ function openModal(type,idModal,id) {
 }
 
 function updateTable() {
-    getDataTable();
-}
-
-function getDataTable() {
     $("#onTable").html('Cargando tabla.. <div class="spinner-border"></div>');
-    sendAjax({}, 'GET').then(
+    sendAjax({}, 'GETTABLE').then(
         function (res) {    
             data = JSON.parse(res);
             $("#onTable").html(data);

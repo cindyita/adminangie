@@ -302,3 +302,24 @@ function createFile($campo,$ruta,$nameFile = "",$reemplazar = 1) {
         return "Error en la consulta: " . $e->getMessage();
     }
 }
+
+function money($number, $currencySymbol = '$') {
+    $formattedNumber = number_format($number, 2, '.', ',');
+    return $currencySymbol . $formattedNumber;
+}
+
+function dataInQuery($data,$idCompany = false,$idUser = false){
+    if(is_array($data)){
+        unset($data['__view__']);
+        unset($data['id']);
+        if($idCompany){
+            $data['id_company'] = $_SESSION['MYSESSION']['company']['id'];
+        }
+        if($idUser){
+            $data['id_user'] = $_SESSION['MYSESSION']['id'];
+        }
+        return $data;
+    }
+    return false;
+}
+

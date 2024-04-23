@@ -14,6 +14,12 @@ PagesController::headerLayout();
 $router->get('/', 'PagesController@home');
 $router->get('/home', 'PagesController@home');
 $router->get('/users', 'PagesController@users');
+$router->get('/orders', 'PagesController@orders');
+$router->get('/sales', 'PagesController@sales');
+$router->get('/products', 'PagesController@products');
+$router->get('/services', 'PagesController@services');
+$router->get('/categories', 'PagesController@categories');
+$router->get('/contacts', 'PagesController@contacts');
 $router->get('/settings', 'PagesController@settings');
 
 

@@ -20,7 +20,7 @@ function checkExistEmail() {
     $data = getPostData();
     $db = new QueryModel();
     if (!empty($data)) {
-        $row = $db->queryUnique("SELECT email FROM sys_users WHERE email=:email",[":email"=>$data['email']]);
+        $row = $db->queryUnique("SELECT email FROM sys_user WHERE email=:email",[":email"=>$data['email']]);
         $response = json_encode($row);
     } else {
         $response = json_encode(['error'=>'Invalid format or no info']);
@@ -42,7 +42,7 @@ function register(){
                 return 5;
             }
             $pass = password_hash($data['pass'], PASSWORD_DEFAULT);
-            $row = $db->query("INSERT INTO sys_users(name,email,password,id_company) VALUES (:name,:email,:pass,:id_company)",[":name"=>$data['name'],":email"=>$data['email'],":pass"=> $pass,":id_company"=>$idCompany]);
+            $row = $db->query("INSERT INTO sys_user(name,email,password,id_company) VALUES (:name,:email,:pass,:id_company)",[":name"=>$data['name'],":email"=>$data['email'],":pass"=> $pass,":id_company"=>$idCompany]);
             $response = json_encode($row);
             // if($response){
             //     sendEmail($data['email'],$data['name'],"Bienvenid@ a Angie","Te has registrado correctamente");

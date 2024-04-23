@@ -80,6 +80,11 @@
     }
   }
 }
+.link-disabled {
+  opacity:0.5;
+  color: grey;
+  pointer-events: none;
+}
 /*-------Table------*/
 .table {
   margin-top:10px;
@@ -557,6 +562,38 @@ a .text-secondary:hover i{
   background-color: transparent;
   color: var(--text);
 }
+/*------------*/
+.contact_results {
+    position: absolute;
+    z-index: 10;
+    background-color: #ffffff;
+    margin-top: 0.25rem;
+    border: 1px solid #d1d5db;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 0.375rem;
+    color:black;
+}
+.orange {
+  color: orange !important;
+}
+.option-result {
+  cursor: pointer;
+  &:hover {
+    background-color: slategray;
+  }
+}
+.icon-search {
+  position: absolute;
+  color:grey;
+  right: 12px;
+  bottom: 10px;
+  display: flex;
+  align-items: center;
+  padding-left: 3rem;
+  pointer-events: none;
+}
+
 /*------------LOADER----------*/
 .page-overlay {
     position: fixed;

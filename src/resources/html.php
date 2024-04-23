@@ -1,12 +1,14 @@
 <?php
 
-function table($id,$data, $actions = false, $customActions = ""){
+function table($id,$data, $actions = false, $customActions = "",$formatMoney = []){
     $html = '<div class="p-2"><table class="table table-striped"><thead class="table-primary"><tr>';
 
     if(is_array($data) && count($data) > 0){
+        
         foreach ($data[0] as $key => $value) {
             $html .= '<th>'.$key.'</th>';
         }
+        
         if($actions && !$customActions){
             $html .= '<th>Acciones</th>';
         }else if($actions && $customActions){
@@ -17,11 +19,18 @@ function table($id,$data, $actions = false, $customActions = ""){
         
         foreach ($data as $row) {
             $html .= '<tr>';
-            foreach ($row as $value) {
-                $html .= '<td>'.$value.'</td>';
+            foreach ($row as $key => $value) {
+                if($formatMoney != [] && in_array($key,$formatMoney)){
+                    $html .= '<td>'.money($value).'</td>';
+                }elseif($key == "img"){
+                    $html .= '<td><a href="'.$value.'" target="_blank"><img src="'.$value.'" onerror="this.src = \'./assets/img/system/user.avif\'" loading="lazy" width="30px"></a></td>';
+                }else{
+                    $html .= '<td>'.$value.'</td>';
+                }
+                
             }
 
-            $html .= '<td>'.btnActions($actions,'User',$row['id']).'</td>';
+            $html .= '<td>'.btnActions($actions,$id,$row['id']).'</td>';
 
             $html .= '</tr>';
         }
@@ -54,9 +63,10 @@ function btnActions($actions,$idModal,$id,$customActions = ""){
     }
 }
 
-function modal($idModal, $title, $content){
+function modal($idModal, $title, $content,$size = ""){
+    $size = $size != "" ? 'modal-'.$size : "";
     $html = '<div class="modal" id="'.$idModal.'">
-                <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-dialog modal-dialog-centered '.$size.'">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title">'.$title.'</h4>
@@ -67,4 +77,13 @@ function modal($idModal, $title, $content){
                 </div>
             </div>';
     return $html;
+}
+
+function generateDatalist($array,$target = 0) {
+    $options = '';
+    foreach ($array as $item) {
+        $name = $target != 0 ? $item[$target] : (isset($item['name']) ? $item['name'] : $item[1]);
+        $options .= '<option value="' . $item['id'] . '" data-text="' . $name . '">';
+    }
+    return $options;
 }

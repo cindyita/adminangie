@@ -17,7 +17,7 @@ class AuthController
                 $db = new QueryModel();
                 
                 $email = $data['email'];
-                $row = $db->unique("sys_users","email = '$email'");
+                $row = $db->unique("sys_user","email = '$email'");
                 if($row && $row != [] && password_verify($data['pass'], $row['password'])){
 
                     if($row['status'] != 1){
@@ -123,7 +123,7 @@ class AuthController
         }
         $id = $info->data;
         $db = new QueryModel();
-        $row = $db->value("sys_users","id = $id","id");
+        $row = $db->value("sys_user","id = $id","id");
         return $row;
     }
 

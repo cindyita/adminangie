@@ -88,13 +88,67 @@ class PagesController
         require_once "./src/views/pages/home.php";
     }
 
+    // PÁGINA ORDERS
+    public static function orders() {
+        self::checkSession();
+        self::menuLayout('orders');
+        self::pageScript('orders');
+        require_once "./src/views/pages/orders.php";
+    }
+
+    // PÁGINA PRODUCTS
+    public static function products() {
+        self::checkSession();
+        self::menuLayout('products');
+        self::pageScript('products');
+        $idcompany = $_SESSION['MYSESSION']['company']['id'];
+        $db = new QueryModel();
+        $categories = $db->select("reg_category","id_company = $idcompany AND type = 'P'");
+        $contacts = $db->select("reg_contact","id_company = $idcompany");
+        require_once "./src/views/pages/products.php";
+    }
+
+    // PÁGINA SERVICES
+    public static function services() {
+        self::checkSession();
+        self::menuLayout('services');
+        self::pageScript('services');
+        require_once "./src/views/pages/services.php";
+    }
+
+    // PÁGINA CATEGORIES
+    public static function categories() {
+        self::checkSession();
+        self::menuLayout('categories');
+        self::pageScript('categories');
+        require_once "./src/views/pages/categories.php";
+    }
+
+    // PÁGINA CONTACTS
+    public static function contacts() {
+        self::checkSession();
+        self::menuLayout('contacts');
+        self::pageScript('contacts');
+        $db = new QueryModel();
+        $typesContacts = $db->select("reg_type_contact");
+        require_once "./src/views/pages/contacts.php";
+    }
+
+    // PÁGINA SALES
+    public static function sales() {
+        self::checkSession();
+        self::menuLayout('sales');
+        self::pageScript('sales');
+        require_once "./src/views/pages/sales.php";
+    }
+
     // PÁGINA USERS
     public static function users() {
         self::checkSession();
         self::menuLayout('users');
         self::pageScript('users');
         $db = new QueryModel();
-        $roles = $db->select("sys_role");
+        $roles = $db->select("sys_rol");
         require_once "./src/views/pages/users.php";
     }
 

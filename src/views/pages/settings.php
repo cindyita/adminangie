@@ -90,7 +90,7 @@
 
         <div class="mt-3" >
             <div class="form-check form-switch">
-                <input class="form-check-input cursor-pointer" type="checkbox" id="db_type" name="db_type" <?php echo $_SESSION['MYSESSION']['company']['db_type'] == 1 ? 'checked': "" ?> data-bs-toggle="tooltip" title="Decide si quieres usar la base de datos local o remota (Esta opción no sincroniza los datos).">
+                <input class="form-check-input cursor-pointer" type="checkbox" id="db_type" name="db_type" <?php echo $_SESSION['MYSESSION']['company']['db_type'] == 1 ? 'checked': "" ?> data-bs-toggle="tooltip" title="Decide si quieres usar la base de datos local o remota (Esta opción no sincroniza los datos)." disabled>
                 <label class="form-check-label" for="db_type">Usar base de datos remota</label>
             </div>
         </div>

@@ -31,12 +31,14 @@
                             <span></span>
                             <span></span>
                         </div>
-                        <div class="search-box pull-left">
+                        <!--------SEARCH----------------->
+                        <div class="search-box pull-left d-none">
                             <form action="#">
                                 <input type="text" name="search" placeholder="Buscar.." required>
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </form>
                         </div>
+                        <!------------------------------->
                     </div>
                     <!-- profile -->
                     <div class="d-flex gap-3 align-items-center">

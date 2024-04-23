@@ -24,6 +24,10 @@ function savesettings() {
     
     $img_logo = null;
     if($_FILES['img_logo']){
+        // $imgOld1 = $db->value("sys_company","id = $id_company","img_logo");
+        // if($imgOld1){
+        //     unlink($rutaBase.$imgOld1);
+        // }
         $img_logo = createFile('img_logo',$rutaBase);
         if($img_logo == 6){
             echo 6;
@@ -33,8 +37,13 @@ function savesettings() {
             $_SESSION['MYSESSION']['company']['img_logo'] = $img_logo;
         }
     }
+
     $img_favicon = null;
     if($_FILES['img_favicon']){
+        // $imgOld2 = $db->value("sys_company","id = $id_company","img_favicon");
+        // if($imgOld2){
+        //     unlink($rutaBase.$imgOld2);
+        // }
         $img_favicon = createFile('img_favicon',$rutaBase);
         if($img_favicon == 6){
             echo 6;
@@ -46,6 +55,10 @@ function savesettings() {
     }
     $img_font = null;
     if($_FILES['img_font']){
+        // $imgOld3 = $db->value("sys_company","id = $id_company","img_font");
+        // if($imgOld3){
+        //     unlink($rutaBase.$imgOld3);
+        // }
         $img_font = createFile('img_font',$rutaBase);
         if($img_font == 6){
             echo 6;

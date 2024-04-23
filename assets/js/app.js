@@ -3,9 +3,14 @@ const CONTROLLER = pageController();
 
 
 $(function () {
+
   $('.page-container').addClass('sbar_collapsed');
   $(".page-overlay").fadeOut();
+
   initTable();
+
+  disableLinks();
+
 });
 
 /**
@@ -200,10 +205,10 @@ function validarURL(url) {
 function copyToClipboard(text) {
   navigator.clipboard.writeText(text)
     .then(function() {
-      message('success', 'Enlace copiado al portapapeles');
+      message('Enlace copiado al portapapeles',"success");
     })
     .catch(function() {
-      message('error', 'No se pudo copiar el enlace');
+      message('No se pudo copiar el enlace',"error");
     });
 }
 
@@ -231,6 +236,23 @@ function transposeData(modalid, data) {
             }
             if (key == 'id' && $("#" + modalid + "-" + key + "Text").length > 0) {
                 $("#"+modalid+"-"+key+"Text").html(value);
+            }
+        }
+    }
+}
+
+function transposeDataEdit(data) {
+    for (const key in data) {
+        if (data.hasOwnProperty(key)) {
+            const value = data[key];
+            const element = $("#" + key + "Edit");
+            if (element.length > 0) {
+                
+                if (element.is("input") || element.is("select") || element.is("textarea") ) {
+                    element.val(value);
+                } else {
+                    element.html(value);
+                }
             }
         }
     }
@@ -265,4 +287,59 @@ function initTable() {
             url: './assets/required/dataTables/es-MX.json'
         }
     });
+}
+//Deshabilitar links con la clase link-disabled
+function disableLinks() {
+  $('.link-disabled').removeAttr('href');
+}
+
+function notJustNumbers(input) {
+    var value = input.value;
+    var regex = /^[0-9]+$/;
+    if (regex.test(value)) {
+        message("No puedes ingresar solo números en el campo.","error");
+        input.value = "";
+    }
+}
+
+function intelligentSearch(idInputHidden, idInputText, idSugData = 'sug-data', idSugDataResults = 'sug-data-results', numMinWords = 3) {
+    
+    $("#"+idInputText).removeClass('orange');
+    $("#"+idInputHidden).val("");
+
+    const searchText = $("#"+idInputText).val().toLowerCase();
+    $("#" + idSugDataResults).empty();
+
+    $("#"+idSugDataResults).addClass('d-none');
+
+    if (searchText != "" && searchText.length >= numMinWords) {
+
+      $("#" + idSugData + " option").each(function () {
+            
+            const optionText = $(this).data('text');
+            const optionIcon = $(this).data('icon') ? '<i class="'+$(this).data('icon')+'"></i> ' : "";
+            const suggestion = optionText.toLowerCase();
+            const optionId = $(this).attr('value');
+            
+            if (suggestion.includes(searchText)) {
+                $("#"+idSugDataResults).removeClass('d-none');
+                $("#" + idSugDataResults).append($("<div onclick='searchDataResultsOption(" + optionId + ",\"" + optionText + "\",\"" + idInputText + "\", \"" + idInputHidden + "\", \"" + idSugDataResults + "\")'>").html('<div class="option-result py-2 px-3">' + optionIcon + optionText + '</div>'));
+            }
+        });
+    }
+    // $("#" + idInputHidden).val($("#" + idInputText).val());
+}
+
+function searchDataResultsOption(optionId, optionText, idInputText, idInputHidden, idSugDataResults) {
+    $("#"+idSugDataResults).empty();
+    $("#"+idSugDataResults).addClass('d-none');
+    $("#"+idInputText).val(optionText);
+    $("#"+idInputHidden).val(optionId);
+    $("#" + idInputText).addClass('orange');
+}
+
+function hiddenResults(idSugDataResults) {
+    setTimeout(function() {
+        $("#"+idSugDataResults).addClass('d-none');
+    }, 100);
 }
