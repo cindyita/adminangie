@@ -5,17 +5,17 @@
     <a href="sales"><i class="fa-solid fa-clipboard-check"></i><span>Ventas</span></a>
 </li>
 <li class="<?php echo activeUrl("orders",$page); ?>">
-    <a href="orders" class="link-disabled"><i class="fa-solid fa-file-lines"></i><span>Pedidos</span></a>
+    <a href="orders"><i class="fa-solid fa-calendar"></i><span>Pedidos</span></a>
 </li>
 <li class="<?php echo activeUrl("products",$page); ?>">
     <a href="products"><i class="fa-solid fa-box"></i><span>Productos</span></a>
 </li>
 <li class="<?php echo activeUrl("services",$page); ?>">
-    <a href="services" class="link-disabled"><i class="fa-solid fa-bell-concierge"></i><span>Servicios</span></a>
+    <a href="services"><i class="fa-solid fa-bell-concierge"></i><span>Servicios</span></a>
 </li>
-<li class="<?php echo activeUrl("inventory",$page); ?>">
+<!-- <li class="?php echo activeUrl("inventory",$page); ?>">
     <a href="inventory" class="link-disabled"><i class="fa-solid fa-boxes-stacked"></i><span>Inventario</span></a>
-</li>
+</li> -->
 <li class="<?php echo activeUrl("categories",$page); ?>">
     <a href="categories"><i class="fa-solid fa-tag"></i><span>Categorías</span></a>
 </li>

@@ -113,6 +113,10 @@ class PagesController
         self::checkSession();
         self::menuLayout('services');
         self::pageScript('services');
+        $idcompany = $_SESSION['MYSESSION']['company']['id'];
+        $db = new QueryModel();
+        $categories = $db->select("reg_category","id_company = $idcompany AND type = 'S'");
+        $contacts = $db->select("reg_contact","id_company = $idcompany");
         require_once "./src/views/pages/services.php";
     }
 
@@ -134,11 +138,21 @@ class PagesController
         require_once "./src/views/pages/contacts.php";
     }
 
+    // PÁGINA CONTACTS
+    public static function inventory() {
+        self::checkSession();
+        self::menuLayout('inventory');
+        self::pageScript('inventory');
+        require_once "./src/views/pages/inventory.php";
+    }
+
     // PÁGINA SALES
     public static function sales() {
         self::checkSession();
         self::menuLayout('sales');
         self::pageScript('sales');
+        $db = new QueryModel();
+        $payment_methods = $db->select("reg_payment_method","status = 1");
         require_once "./src/views/pages/sales.php";
     }
 

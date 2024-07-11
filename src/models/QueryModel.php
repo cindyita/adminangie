@@ -24,19 +24,11 @@ class QueryModel {
     // CONEXIONES
     private function connect($dbName = null) {
         try {
-            $dbprefix = "";
-            if($_SESSION && $_SESSION['MYSESSION']['company']['db_type'] == 0){
-                    $dbprefix = "LOCAL_";
-            }elseif(!$_SESSION){
-                if($_ENV['USE_LOCAL'] == "true"){
-                    $dbprefix = "_LOCAL";
-                }
-            }
             
-            $host = $_ENV[$dbprefix.'DB_HOST'];
-            $dbname = $dbName ?? $_ENV[$dbprefix.'DB_NAME'];
-            $user = $_ENV[$dbprefix.'DB_USER'];
-            $pass = $_ENV[$dbprefix.'DB_PASS'];
+            $host = $_ENV['DB_HOST'];
+            $dbname = $dbName ?? $_ENV['DB_NAME'];
+            $user = $_ENV['DB_USER'];
+            $pass = $_ENV['DB_PASS'];
 
             $dsn = 'mysql:host=' . $host . ';dbname=' . $dbname . ';charset=utf8';
             $options = [

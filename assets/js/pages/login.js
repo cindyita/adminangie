@@ -6,6 +6,7 @@ $(function () {
         if ($("#email").val() != "" && $("#pass").val() != "") {
             sendAjaxForm(formData, 'LOGIN').then(
                 function (res) { 
+                    console.log(res);
                     if (processError(res)) {
                         message("Has iniciado sesión correctamente", "success");
                         $("#login")[0].reset();

@@ -20,7 +20,7 @@ $newCategory = '<div>
                             <label for="type" class="form-label">Tipo de categoría:</label>
                             <select class="form-select" id="type" name="type" required>
                                 <option value="P">Producto</option>
-                                <option value="S">Service</option>
+                                <option value="S">Servicio</option>
                             </select>
                         </div>
                         <div class="mt-3">

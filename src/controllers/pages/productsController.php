@@ -28,12 +28,12 @@ if (!empty(getView())) {
 function gettable() {
     $db = new QueryModel();
     $id_company = $_SESSION['MYSESSION']['company']['id'];
-    $row = $db->query("SELECT p.id,p.name Nombre,c.name Categoría,p.price Precio,p.cost Costo,(p.price-p.cost) Margen,p.stock Stock,
+    $row = $db->query("SELECT p.id,CONCAT('./assets/img/products/',$id_company,'/',p.img) AS img,p.name Nombre,p.price Precio,p.cost Costo,(p.price-p.cost) Margen,p.stock Stock,c.name Categoría,
     CASE 
     WHEN p.availability = 1 THEN '<span class=\'text-success\'>Disponible</span>'
     WHEN p.availability = 0 THEN '<span class=\'text-secondary\'>No disponible</span>' 
     ELSE p.availability
-    END AS Disponible,CONCAT('./assets/img/products/',$id_company,'/',p.img) AS img FROM reg_product p LEFT JOIN reg_category c ON p.id_category = c.id WHERE p.id_company = :id_company",[":id_company"=>$id_company]);
+    END AS Disponible FROM reg_product p LEFT JOIN reg_category c ON p.id_category = c.id WHERE p.id_company = :id_company",[":id_company"=>$id_company]);
     if(is_array($row) && count($row) > 0){
         $res = table('Product',$row,true,"",["Precio","Costo","Margen"]);
     }
@@ -70,6 +70,10 @@ function create(){
             echo 6;
             return;
         }
+    }
+
+    if($data['id_contact'] == "" || $data['id_contact'] == 0){
+        unset($data['id_contact']);
     }
 
     $fields = dataInQuery($data,true,true);
@@ -150,7 +154,14 @@ function delete(){
     $data = $_POST;
     $db = new QueryModel();
     if($data && $data['id']){
-        $row = $db->query("DELETE FROM reg_product WHERE id=:id",[':id'=>$data['id']]);
+        $id = $data['id'];
+        $id_company = $_SESSION['MYSESSION']['company']['id'] ?? "0";
+        $rutaBase = '../../../assets/img/products/' . $id_company . '/';
+        $imgOld = $db->value("reg_product","id = $id","img");
+        if($imgOld){
+            unlink($rutaBase.$imgOld);
+        }
+        $row = $db->query("DELETE FROM reg_product WHERE id=:id",[':id'=>$id]);
     }
     if($row == []){
         echo 1;

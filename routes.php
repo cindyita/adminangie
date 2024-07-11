@@ -18,6 +18,7 @@ $router->get('/orders', 'PagesController@orders');
 $router->get('/sales', 'PagesController@sales');
 $router->get('/products', 'PagesController@products');
 $router->get('/services', 'PagesController@services');
+$router->get('/inventory', 'PagesController@inventory');
 $router->get('/categories', 'PagesController@categories');
 $router->get('/contacts', 'PagesController@contacts');
 $router->get('/settings', 'PagesController@settings');

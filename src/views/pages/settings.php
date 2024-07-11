@@ -11,7 +11,7 @@
     <div>
         <form method="post" id="saveSettingsForm">
             <div class="mt-3 d-flex gap-3 align-items-center">
-                <label class="form-label">Nombre de la app:</label>
+                <label class="form-label">Nombre de la aplicación:</label>
                 <div class="d-flex">
                     <input type="text" class="form-control" name="app_title" value="<?php echo $_SESSION['MYSESSION']['company']['app_title']; ?>">
                 </div>
@@ -41,8 +41,20 @@
                 <input type="color" class="form-control form-control-color" name="tertiary_color" value="<?php echo $_SESSION['MYSESSION']['company']['tertiary_color'] ?? "#F773CC"; ?>">
             </div>
             <div class="mt-3 d-flex gap-3 align-items-center">
+                <label class="form-label">Color del texto del menú:</label>
+                <input type="color" class="form-control form-control-color" name="menutext_color" value="<?php echo $_SESSION['MYSESSION']['company']['menutext_color'] ?? "#FFFFFF"; ?>">
+            </div>
+            <div class="mt-3 d-flex gap-3 align-items-center">
                 <label class="form-label">Color de acento:</label>
                 <input type="color" class="form-control form-control-color" name="accent_color" value="<?php echo $_SESSION['MYSESSION']['company']['accent_color'] ?? "#74d7ff"; ?>">
+            </div>
+            <div class="mt-3 d-flex gap-3 align-items-center">
+                <label class="form-label">Aumentar el texto en:</label>
+                <div class="input-group" style="width:fit-content">
+                    <span class="input-group-text">+</span>
+                    <input type="number" class="form-control form-control-color" name="text_size_plus" value="<?php echo $_SESSION['MYSESSION']['company']['text_size_plus'] ?? 0; ?>">
+                    <span class="input-group-text">pt</span>
+                </div>
             </div>
             <div class="mt-3 d-flex gap-3 align-items-center">
                 <label class="form-label">Logo:</label>

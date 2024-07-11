@@ -77,6 +77,8 @@ function savesettings() {
         'secondary_color' => $data['secondary_color'] ?? null,
         'tertiary_color' => $data['tertiary_color'] ?? null,
         'accent_color' => $data['accent_color'] ?? null,
+        'menutext_color' => $data['menutext_color'] ?? null,
+        'text_size_plus' => $data['text_size_plus'] ?? 0,
         'img_logo' => $img_logo ?? null,
         'img_favicon' => $img_favicon ?? null,
         'img_font' => $img_font ?? null
@@ -110,7 +112,7 @@ function savesettings() {
 }
 
 function changedbtype(){
-    $id_company = $_SESSION['MYSESSION']['company']['id'] ?? "0";
+    $id_company = $_SESSION['MYSESSION']['company']['id'] ?? 1;
 
     $dbtype = $_SESSION['MYSESSION']['company']['db_type'] == "1" ? "0" : "1";
     $_SESSION['MYSESSION']['company']['db_type'] = $dbtype;

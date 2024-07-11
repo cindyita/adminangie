@@ -202,7 +202,7 @@ function getData() {
  * @return -The function `getPostData()` is returning the value of `['data']`.
  */
 function getPostData() {
-    return $_POST['data'];
+    return $_POST['data'] ?? $_POST;
 }
 
 /**
@@ -323,3 +323,30 @@ function dataInQuery($data,$idCompany = false,$idUser = false){
     return false;
 }
 
+/**
+ * The function creates HTML select options based on an array of data using specified name and value
+ * keys.
+ * 
+ * @param $array The `createSelectOptions` function takes three parameters:
+ * @param $name The `` parameter in the `createSelectOptions` function is used to specify the key
+ * in the associative array `` that contains the text to be displayed as the option label in the
+ * HTML `<option>` tag.
+ * @param $value The `value` parameter in the `createSelectOptions` function is used to specify the key
+ * in the associative array `` that should be used as the value attribute for the `<option>` tags
+ * in the generated HTML select options.
+ * 
+ * @return -The function `createSelectOptions` returns a string of HTML `<option>` elements based on the
+ * input array, where the option values are taken from the specified key `` in the array
+ * elements, and the option labels are taken from the specified key `` in the array elements.
+ */
+function createSelectOptions($array,$name,$value = ''){
+    $html = '';
+    foreach ($array as $val) {
+        if($value){
+            $html .= '<option value="'.$val[$value].'">'.$val[$name].'</option>';
+        }else{
+            $html .= '<option>'.$val[$name].'</option>';
+        }
+    }
+    return $html;
+}

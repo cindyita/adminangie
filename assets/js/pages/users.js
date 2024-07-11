@@ -118,7 +118,7 @@ function openModal(type,idModal,id) {
                     console.error(error);
             });
         } else if (type == "edit") {
-            sendAjax({id:id}, 'viewUser').then(
+            sendAjax({id:id}, 'SELECT').then(
                 function (res) { 
                     data = JSON.parse(res);
                     $("#nameEdit").val(data['name']);
@@ -140,7 +140,7 @@ function openModal(type,idModal,id) {
 function updateTable() {
     $("#onTable").html('Cargando tabla.. <div class="spinner-border"></div>');
     sendAjax({}, 'GETTABLE').then(
-        function (res) {    
+        function (res) {   
             data = JSON.parse(res);
             $("#onTable").html(data);
             initTable();

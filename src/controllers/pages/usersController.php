@@ -30,12 +30,13 @@ if (!empty(getView())) {
 
 function getUsers() {
     $db = new QueryModel();
-    $row = $db->query("SELECT id,name Nombre,email Email,
+    $id_company = $_SESSION['MYSESSION']['company']['id'];
+    $row = $db->query("SELECT id,CONCAT('./assets/img/users/{$id_company}/',img) AS img,name Nombre,email Email,
     CASE 
     WHEN status = 1 THEN '<span class=\'text-success\'>Activo</span>'
     WHEN status = 0 THEN '<span class=\'text-secondary\'>Inactivo</span>' 
     ELSE status
-    END AS Estatus,DATE_FORMAT(timestamp_create, '%d-%m-%Y') FechaCreado FROM sys_user WHERE id_company = :id_company",[":id_company"=>$_SESSION['MYSESSION']['company']['id']]);
+    END AS Estatus,DATE_FORMAT(timestamp_create, '%d-%m-%Y') Registro FROM sys_user WHERE id_company = :id_company",[":id_company"=>$_SESSION['MYSESSION']['company']['id']]);
     if(is_array($row) && count($row) > 0){
         $res = table('User',$row,true);
     }
@@ -102,10 +103,10 @@ function update(){
     $db = new QueryModel();
 
     $fields = [
-        'name' => $data['name'] ?? null,
-        'email' => $data['email'] ?? null,
-        'id_role' => $data['id_role'] ?? null,
-        'status' => $data['status'] ?? null
+        'name' => $data['name'],
+        'email' => $data['email'],
+        'id_role' => $data['id_role'],
+        'status' => $data['status']
     ];
 
     $setParams = [];

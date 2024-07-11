@@ -4,6 +4,7 @@
 <script src="./assets/required/metisMenu/metisMenu.min.js"></script>
 <script src="./assets/required/slimscroll/jquery.slimscroll.min.js"></script>
 <script src="./assets/required/dataTables/datatables.min.js" defer></script>
+<script src="./node_modules/flatpickr/dist/flatpickr.min.js"></script>
 
 <script src="./assets/js/app.js?version=<?php echo VERSION; ?>"></script>
 <?php 

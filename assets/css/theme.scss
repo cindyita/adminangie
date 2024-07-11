@@ -9,6 +9,7 @@
     --fontHeader: "roboto";
     --fontText: "roboto";
     --text: black;
+    // --textSecondary: white;
     --font: white;
     --fontSecondary: #f3f5f7;
     --radius: 25px;
@@ -16,6 +17,7 @@
     --bs-success-bg-subtle: lightgreen;
     --bs-info-bg-subtle: lightblue;
     --bs-warning-bg-subtle: yellow;
+    // --fontPlusSize: 0pt;
 }
 // @media (prefers-color-scheme: dark) {
 //   :root {
@@ -31,10 +33,18 @@
   --fontSecondary: #24282e;
   --primaryFont: white;
 }
+// * {
+//   text-size-adjust: 80%;
+//   -webkit-text-size-adjust: 80%;
+// }
 /*---------GENERAL--------*/
 .main,body {
   background-color: var(--font);
   color: var(--text);
+  font-size: calc(12pt + var(--fontPlusSize));
+}
+i {
+  font-size: calc(12pt + var(--fontPlusSize));
 }
 .main-content {
   width: 100%;
@@ -89,23 +99,22 @@
 .table {
   margin-top:10px;
   width: 100%;
-}
-.table {
+  max-width: 100% !important;
   td,th {
     color:var(--text);
   }
 }
 .active>.page-link, .page-link.active {
     z-index: 3;
-    color: white;
+    color: var(--textSecondary);
     background-color: var(--primary);
     border-color: lightgrey;
-    font-size: 10pt;
+    font-size: calc(10pt + var(--fontPlusSize));
 }
 .table-primary {
   background-color: var(--primary);
   th {
-    color:white;
+    color:var(--textSecondary);
   }
 
 }
@@ -115,7 +124,7 @@
     pointer-events: none;
     background-color: transparent;
     border-color: lightgrey;
-    font-size: 10pt;
+    font-size: calc(10pt + var(--fontPlusSize));
 }
 .dt-buttons button{
   margin-right: 8px;
@@ -181,8 +190,8 @@
 .metismenu li a {
     position: relative;
     display: block;
-    color: #ffffffa2;
-    font-size: 17px;
+    color: var(--textSecondary);
+    font-size: calc(17px + var(--fontPlusSize));
     text-transform: capitalize;
     padding: 15px 10px;
     letter-spacing: 0;
@@ -200,7 +209,7 @@
     font-family: fontawesome;
     right: 15px;
     top: 12px;
-    font-size: 20px;
+    font-size: calc(20px + var(--fontPlusSize));
 }
 
 .metismenu li.active>a:after {
@@ -323,7 +332,7 @@
     position: absolute;
     right: 21px;
     top: 14px;
-    font-size: 14px;
+    font-size: calc(14px + var(--fontPlusSize));
     color: #bbbcc9;
 }
 /*-----USER----*/
@@ -347,6 +356,7 @@
 .dropdown-menu {
   border-radius: 25px;
   border: 1px solid lightgrey;
+  font-size: calc(13pt + var(--fontPlusSize));
 }
 .dropdown-item {
   padding-left: 20px;
@@ -373,7 +383,7 @@
 }
 
 .maxmin li>i {
-    font-size: 35px;
+    font-size: calc(35px + var(--fontPlusSize));
     color: #bdbcbc;
     vertical-align: middle;
     cursor: pointer;
@@ -388,7 +398,7 @@
 
 /*----------TEXTO---------*/
 .text-secondary,.text-secondary span,.text-secondary i {
-  font-size: 11pt;
+  font-size: calc(11pt + var(--fontPlusSize));
   color: lightgrey;
 }
 
@@ -400,12 +410,13 @@ a .text-secondary:hover i{
 /*----------BOTONES----------*/
 .btn {
   padding: 5px 20px 7px !important;
-  font-size: 13pt !important;
+  font-size: calc(13pt + var(--fontPlusSize)) !important;
   border:0 !important;
   border-radius: 20px !important;
 }
 .btn-primary {
   background-color: var(--primary) !important;
+  color: var(--textSecondary);
   &:hover {
     background-color: var(--secondary) !important;
   }
@@ -456,7 +467,7 @@ a .text-secondary:hover i{
   background-color: white;
   i {
     color:var(--primary);
-    font-size: 15pt;
+    font-size: calc(15pt + var(--fontPlusSize));
   }
 }
 .d-none {
@@ -490,6 +501,16 @@ a .text-secondary:hover i{
     padding:30px;
   }
 }
+
+h1 { --baseFontSize: 2rem; }
+h2 { --baseFontSize: 1.75rem; }
+h3 { --baseFontSize: 1.5rem; }
+h4 { --baseFontSize: 1.25rem; }
+h5 { --baseFontSize: 1rem; }
+h6 { --baseFontSize: 0.875rem; }
+h1, h2, h3, h4, h5, h6 {
+    font-size: calc(var(--baseFontSize, 1rem) + var(--fontPlusSize));
+}
 /*---------Bootstrap---------*/
 /*--FORM--*/
 .form-control,.form-select {
@@ -497,6 +518,7 @@ a .text-secondary:hover i{
     border-radius: var(--radius);
     color: var(--text) !important;
     background-color: rgba(255,255,255,0.2) !important;
+    font-size: calc(1rem + var(--fontPlusSize));
 }
 .form-control:focus, .form-select:focus {
     border: 1px solid var(--accent);
@@ -530,7 +552,7 @@ a .text-secondary:hover i{
 .btn-close {
   --bs-btn-close-bg: "";
   color:var(--text);
-  font-size:18pt;
+  font-size: calc(18pt + var(--fontPlusSize));
   display: flex;
   justify-content: center;
   align-items: center;
@@ -563,7 +585,8 @@ a .text-secondary:hover i{
   color: var(--text);
 }
 /*------------*/
-.contact_results {
+.contact_results,
+.sug-results {
     position: absolute;
     z-index: 10;
     background-color: #ffffff;
@@ -573,6 +596,9 @@ a .text-secondary:hover i{
     overflow: hidden;
     border-radius: 0.375rem;
     color:black;
+}
+.sug-results {
+  margin-top: 2.4rem;
 }
 .orange {
   color: orange !important;
@@ -592,6 +618,27 @@ a .text-secondary:hover i{
   align-items: center;
   padding-left: 3rem;
   pointer-events: none;
+}
+.icon-search-r {
+  position: absolute;
+  color:grey;
+  left: 16px;
+  bottom: 10px;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+.input-search-r {
+  padding-left: 36px;
+}
+.nowrap {
+  flex-wrap: nowrap !important;
+}
+.flexnone {
+  flex:none !important;
+}
+.font-ultra-small {
+  font-size: calc(6pt + var(--fontPlusSize));
 }
 
 /*------------LOADER----------*/

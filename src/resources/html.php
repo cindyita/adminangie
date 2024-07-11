@@ -10,10 +10,9 @@ function table($id,$data, $actions = false, $customActions = "",$formatMoney = [
         }
         
         if($actions && !$customActions){
-            $html .= '<th>Acciones</th>';
+            $html .= '<th></th>';
         }else if($actions && $customActions){
             $html .= '<th>Acciones</th>';
-
         }
         $html .= '</tr></thead><tbody>';
         

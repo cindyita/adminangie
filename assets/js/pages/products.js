@@ -68,6 +68,7 @@ function openModal(type,idModal,id) {
                 function (res) {    
                     data = JSON.parse(res);
                     data = data[0];
+                    let contacto = data['id_contact'] ? `<a href="contacts/`+data['id_contact']+`">`+data['company']+`</a>` : '';
                     html = `<table class="table modalTable">
                                 <tbody>
                                     <tr>
@@ -88,15 +89,15 @@ function openModal(type,idModal,id) {
                                     </tr>
                                     <tr>
                                         <th>Precio</th>
-                                        <td>`+data['price']+`</td>
+                                        <td>`+money(data['price'])+`</td>
                                     </tr>
                                     <tr>
                                         <th>Costo</th>
-                                        <td>`+data['cost']+`</td>
+                                        <td>`+money(data['cost'])+`</td>
                                     </tr>
                                     <tr>
                                         <th>Margen de ganancia:</th>
-                                        <td>`+data['margen']+`</td>
+                                        <td>`+money(data['margen'])+`</td>
                                     </tr>
                                     <tr>
                                         <th>Stock</th>
@@ -108,7 +109,7 @@ function openModal(type,idModal,id) {
                                     </tr>
                                     <tr>
                                         <th>Contacto relacionado:</th>
-                                        <td><a href="contacts/`+data['id_contact']+`">`+data['company']+`</a></td>
+                                        <td>`+contacto+`</td>
                                     </tr>
                                     <tr>
                                         <th>Fecha de creación</th>

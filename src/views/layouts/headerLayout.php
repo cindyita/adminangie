@@ -10,7 +10,7 @@
     <meta property="site_name" content="" />
     <title><?php echo $_SESSION['MYSESSION']['company']['app_title'] ?? "Admin"; ?></title>
 
-    <link rel="shortcut icon" href="<?php echo $_SESSION && $_SESSION['MYSESSION']['company']['img_favicon'] ? './assets/img/company/'.$_SESSION['MYSESSION']['company']['id'].'/'.$_SESSION['MYSESSION']['company']['img_favicon'] : "./assets/img/system/favicon.png"; ?>" type="image/PNG">
+    <link rel="shortcut icon" href="<?php echo $_SESSION && isset($_SESSION['MYSESSION']) && $_SESSION['MYSESSION']['company']['img_favicon'] ? './assets/img/company/'.$_SESSION['MYSESSION']['company']['id'].'/'.$_SESSION['MYSESSION']['company']['img_favicon'] : "./assets/img/system/favicon.png"; ?>" type="image/PNG">
     <!-- <link rel="shortcut icon" href="./assets/img/system/favicon.png" type="image/PNG"> -->
 
     <!-- Dark/light theme -->
@@ -52,6 +52,8 @@
             --secondary: <?php echo $_SESSION['MYSESSION']['company']['secondary_color'] ?? "#A368ED"; ?>;
             --tertiary: <?php echo $_SESSION['MYSESSION']['company']['tertiary_color'] ?? "#F773CC"; ?>;
             --accent: <?php echo $_SESSION['MYSESSION']['company']['accent_color'] ?? "#74d7ff"; ?>;
+            --textSecondary: <?php echo $_SESSION['MYSESSION']['company']['menutext_color'] ?? "#fff"; ?>;
+            --fontPlusSize: <?php echo $_SESSION['MYSESSION']['company']['text_size_plus'].'pt' ?? "0pt"; ?>;
         }
         .font1 {
             background-image: url(<?php echo $_SESSION['MYSESSION']['company']['img_font'] ? "assets/img/company/".$_SESSION['MYSESSION']['company']['id']."/".$_SESSION['MYSESSION']['company']['img_font'] : "assets/img/system/font.jpg"; ?>);
@@ -68,6 +70,8 @@
             --tertiary: #F773CC;
             --accent: #74d7ff;
             --urlFont: "../img/system/font.jpg";
+            --textSecondary: white;
+            --fontPlusSize: 0pt;
         }
     </style>
     <?php } ?>
@@ -76,6 +80,7 @@
 
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="./assets/required/dataTables/datatables.min.css">
+    <link rel="stylesheet" href="./node_modules/flatpickr/dist/flatpickr.min.css">
 
     <link rel="stylesheet" href="./assets/required/metisMenu/metisMenu.css">
     <link rel="stylesheet" href="./assets/required/fontawesome/css/fontawesome.min.css">

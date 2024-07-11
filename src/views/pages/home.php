@@ -5,6 +5,6 @@
 
 <div class="p-2">         
   <div>
-    <p id="random-quote">Frase de hoy</p>
+    <p id="random-quote">Cargando..</p>
   </div>
 </div>

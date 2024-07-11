@@ -5,6 +5,7 @@ const CONTROLLER = pageController();
 $(function () {
 
   $('.page-container').addClass('sbar_collapsed');
+
   $(".page-overlay").fadeOut();
 
   initTable();
@@ -252,8 +253,8 @@ function transposeDataEdit(data) {
                     element.val(value);
                 } else {
                     element.html(value);
-                }
-            }
+              }
+          }
         }
     }
 }
@@ -261,6 +262,7 @@ function transposeDataEdit(data) {
 function initTable() {
   $('.table').DataTable({
         dom: 'Bfrtip',
+        responsive: true,
         buttons: [
             {
                 extend: 'colvis',
@@ -307,7 +309,7 @@ function intelligentSearch(idInputHidden, idInputText, idSugData = 'sug-data', i
     $("#"+idInputText).removeClass('orange');
     $("#"+idInputHidden).val("");
 
-    const searchText = $("#"+idInputText).val().toLowerCase();
+    const searchText = $("#"+idInputText).val().toLowerCase() ?? $("#"+idInputText).val();
     $("#" + idSugDataResults).empty();
 
     $("#"+idSugDataResults).addClass('d-none');
@@ -342,4 +344,16 @@ function hiddenResults(idSugDataResults) {
     setTimeout(function() {
         $("#"+idSugDataResults).addClass('d-none');
     }, 100);
+}
+
+
+function number(amount) {
+    return  parseFloat(amount.replace(/[^0-9.]/g, ''));
+}
+
+function money(amount) {
+    return amount.toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
 }
