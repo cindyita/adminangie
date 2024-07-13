@@ -33,7 +33,7 @@ i {
 .main-content {
   width: 100%;
   height: 100%;
-  padding: 50px;
+  padding: 30px 50px 20px;
 }
 
 .page-container {
@@ -605,6 +605,59 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text);
 }
 
+.day-quote p {
+  font-size: 10pt;
+  opacity: 0.4;
+  font-style: italic;
+}
+
+.stat-card {
+  background-color: var(--secondary);
+  color: var(--textSecondary);
+  padding: 20px 15px 15px;
+  border-radius: 25px;
+  min-width: 160px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.stat-card i {
+  font-size: 25pt;
+  padding: 5px;
+}
+.stat-card span {
+  font-size: 11pt;
+  opacity: 0.6;
+}
+.stat-card h5 {
+  line-height: 5px;
+}
+.stat-card h5 span {
+  font-size: 10pt;
+  font-weight: 500;
+}
+
+/*-----CALENDAR-------*/
+.calendar {
+  width: 55%;
+}
+
+.fc .fc-button-primary {
+  background-color: var(--primary);
+  border: 0;
+  border-radius: 25px;
+}
+
+@media (max-width: 1700px) {
+  .calendar {
+    width: 75%;
+  }
+}
+@media (max-width: 1000px) {
+  .calendar {
+    width: 100%;
+  }
+}
 /*------------*/
 .contact_results,
 .sug-results {

@@ -5,6 +5,7 @@
   "dependencies": {
     "bootstrap": "^5.3.3",
     "flatpickr": "^4.6.13",
+    "fullcalendar": "^6.1.15",
     "jquery": "^3.7.1"
   },
   "devDependencies": {

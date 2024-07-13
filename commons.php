@@ -8,7 +8,7 @@ $dotenv = Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 $appENV = $_ENV['APP_ENV'] ?? "production";
 
-if($appENV == 'local' || $_SESSION['MYSESSION']['company']['db_type'] == "0"){
+if($appENV == 'local' || ($_SESSION && $_SESSION['MYSESSION']['company']['db_type'] == "0")){
     $dotenv = Dotenv::createMutable(__DIR__,'.env.local');
     $dotenv->load();
 }

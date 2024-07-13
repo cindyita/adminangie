@@ -5,7 +5,7 @@
     <a href="sales"><i class="fa-solid fa-clipboard-check"></i><span>Ventas</span></a>
 </li>
 <li class="<?php echo activeUrl("orders",$page); ?>">
-    <a href="orders"><i class="fa-solid fa-calendar"></i><span>Pedidos</span></a>
+    <a href="orders" class="link-disabled"><i class="fa-solid fa-calendar"></i><span>Pedidos</span></a>
 </li>
 <li class="<?php echo activeUrl("products",$page); ?>">
     <a href="products"><i class="fa-solid fa-box"></i><span>Productos</span></a>

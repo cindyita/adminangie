@@ -85,6 +85,8 @@ class PagesController
         self::checkSession();
         self::menuLayout('home');
         self::pageScript('home');
+        $db = new QueryModel();
+        $stats = $db->unique("vw_statistics","1");
         require_once "./src/views/pages/home.php";
     }
 
