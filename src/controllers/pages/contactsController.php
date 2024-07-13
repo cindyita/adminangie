@@ -42,8 +42,11 @@ function select(){
     $data = getPostData();
     $db = new QueryModel();
     $id = $data['id'];
-    $row = $db->queryUnique("SELECT c.*, t.name tipo
-    FROM reg_contact c LEFT JOIN reg_type_contact t ON c.id_type = t.id WHERE c.id_company = :id_company AND c.id = :id",[":id_company" => $_SESSION['MYSESSION']['company']['id'],":id"=>$id]);
+    $row = $db->queryUnique("SELECT c.*, t.name tipo, u.name AS user
+    FROM reg_contact c 
+    LEFT JOIN reg_type_contact t ON c.id_type = t.id 
+    LEFT JOIN sys_user u ON c.id_user = u.id
+    WHERE c.id_company = :id_company AND c.id = :id",[":id_company" => $_SESSION['MYSESSION']['company']['id'],":id"=>$id]);
     echo json_encode($row);
 }
 

@@ -95,24 +95,24 @@ function openModal(type,idModal,id) {
                                         <td>`+data['payment_method']+`</td>
                                     </tr>
                                     <tr>
-                                        <th>Registrado por</th>
-                                        <td>`+data['user']+`</td>
-                                    </tr>
-                                    <tr>
                                         <th>Fecha</th>
                                         <td>`+data['sale_date']+`</td>
                                     </tr>
                                     <tr>
-                                        <th>Creado</th>
-                                        <td>`+data['timestamp_create']+`</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Actualizado</th>
-                                        <td>`+data['timestamp_update']+`</td>
-                                    </tr>
-                                    <tr>
                                         <th>Notas</th>
                                         <td>`+data['notes']+`</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Usuario que registró</th>
+                                        <td>`+data['user']+` (id: `+data['id_user']+`)</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Fecha de creación</th>
+                                        <td>`+ data['timestamp_create'] + `</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Última actualización</th>
+                                        <td>`+(data['timestamp_update'] ?? '')+`</td>
                                     </tr>
                                 </tbody>
                             </table>`;

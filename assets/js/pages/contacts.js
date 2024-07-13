@@ -68,11 +68,11 @@ function openModal(type,idModal,id) {
                                     </tr>
                                     <tr>
                                         <th>Empresa</th>
-                                        <td>`+data['company']+`</td>
+                                        <td>`+(data['company'] ?? '')+`</td>
                                     </tr>
                                     <tr>
                                         <th>Nombre del contacto</th>
-                                        <td>`+data['name_contact']+`</td>
+                                        <td>`+(data['name_contact'] ?? '')+`</td>
                                     </tr>
                                     <tr>
                                         <th>Tipo de contacto</th>
@@ -83,12 +83,36 @@ function openModal(type,idModal,id) {
                                         <td>`+data['prod_serv']+`</td>
                                     </tr>
                                     <tr>
+                                        <th>Teléfono 1</th>
+                                        <td>`+(data['tel1'] ?? '')+`</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Teléfono 2</th>
+                                        <td>`+(data['tel2'] ?? '')+`</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Dirección</th>
+                                        <td>`+(data['address'] ?? '')+`</td>
+                                    </tr>
+                                    <tr>
+                                        <th>RFC</th>
+                                        <td>`+(data['rfc'] ?? '')+`</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Datos extra</th>
+                                        <td>`+(data['extra_data'] ?? '')+`</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Usuario que registró</th>
+                                        <td>`+data['user']+` (id: `+data['id_user']+`)</td>
+                                    </tr>
+                                    <tr>
                                         <th>Fecha de creación</th>
                                         <td>`+data['timestamp_create']+`</td>
                                     </tr>
                                     <tr>
                                         <th>Última actualización</th>
-                                        <td>`+data['timestamp_update']+`</td>
+                                        <td>`+(data['timestamp_update'] ?? '')+`</td>
                                     </tr>
                                 </tbody>
                             </table>`;

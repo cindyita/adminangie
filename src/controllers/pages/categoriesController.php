@@ -44,12 +44,15 @@ function select(){
     $data = getPostData();
     $db = new QueryModel();
     $id = $data['id'];
-    $row = $db->queryUnique("SELECT id,name,
+    $row = $db->queryUnique("SELECT c.id,c.name,c.id_user, u.name user,
     CASE 
-    WHEN type = 'P' THEN 'Producto'
-    WHEN type = 'S' THEN 'Servicio' 
-    ELSE type
-    END AS tipo,type,DATE_FORMAT(timestamp_create, '%d-%m-%Y') FechaCreado,DATE_FORMAT(timestamp_update, '%d-%m-%Y') FechaActualizado FROM reg_category WHERE id_company = :id_company AND id = :id",[":id_company" => $_SESSION['MYSESSION']['company']['id'],":id"=>$id]);
+    WHEN c.type = 'P' THEN 'Producto'
+    WHEN c.type = 'S' THEN 'Servicio' 
+    ELSE c.type
+    END AS tipo,c.type,DATE_FORMAT(c.timestamp_create, '%d-%m-%Y') FechaCreado,DATE_FORMAT(c.timestamp_update, '%d-%m-%Y') FechaActualizado 
+    FROM reg_category c
+    LEFT JOIN sys_user u ON c.id_user = u.id
+    WHERE c.id_company = :id_company AND c.id = :id",[":id_company" => $_SESSION['MYSESSION']['company']['id'],":id"=>$id]);
     echo json_encode($row);
 }
 
@@ -59,7 +62,8 @@ function create(){
     if (!empty($data) && count($data)>0) {
 
         $idCompany = $_SESSION['MYSESSION']['company']['id'];
-        $row = $db->query("INSERT INTO reg_category(name,type,id_company) VALUES (:name,:type,:id_company)",[":name"=>$data['name'],":type"=>$data['type'],":id_company"=>$idCompany]);
+        $idUser = $_SESSION['MYSESSION']['id'];
+        $row = $db->query("INSERT INTO reg_category(name,type,id_user,id_company) VALUES (:name,:type,:id_user,:id_company)",[":name"=>$data['name'],":type"=>$data['type'],":id_user"=>$idUser,":id_company"=>$idCompany]);
         if($row == []){
             $response = 1;
         }else{

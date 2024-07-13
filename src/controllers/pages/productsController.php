@@ -46,12 +46,16 @@ function select(){
     $db = new QueryModel();
     $id = $data['id'];
     $id_company = $_SESSION['MYSESSION']['company']['id'];
-    $row = $db->query("SELECT p.id,p.name,c.name category,p.price,p.cost,(p.price-p.cost) margen,p.stock, p.id_contact,t.company,p.sku,p.availability,
+    $row = $db->query("SELECT p.id,p.name,c.name category,p.price,p.cost,(p.price-p.cost) margen,p.stock, p.id_contact,t.company,p.sku,p.availability,p.id_user,u.name AS user,
     CASE 
     WHEN p.availability = 1 THEN '<span class=\'text-success\'>Disponible</span>'
     WHEN p.availability = 0 THEN '<span class=\'text-secondary\'>No disponible</span>' 
     ELSE p.availability
-    END AS disponible,p.img img_name,CONCAT('./assets/img/products/',$id_company,'/',p.img) AS img,p.timestamp_create,p.timestamp_update FROM reg_product p LEFT JOIN reg_category c ON p.id_category = c.id LEFT JOIN reg_contact t ON p.id_contact = t.id WHERE p.id_company = :id_company AND p.id = :id",[":id_company"=>$_SESSION['MYSESSION']['company']['id'],":id"=>$id]);
+    END AS disponible,p.img img_name,CONCAT('./assets/img/products/',$id_company,'/',p.img) AS img,p.timestamp_create,p.timestamp_update FROM reg_product p 
+    LEFT JOIN reg_category c ON p.id_category = c.id 
+    LEFT JOIN reg_contact t ON p.id_contact = t.id 
+    LEFT JOIN sys_user u ON p.id_user = u.id
+    WHERE p.id_company = :id_company AND p.id = :id",[":id_company"=>$_SESSION['MYSESSION']['company']['id'],":id"=>$id]);
 
     echo json_encode($row);
 }

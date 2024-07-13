@@ -77,6 +77,7 @@ function openModal(type,idModal,id) {
             sendAjax({id:id}, 'SELECT').then(
                 function (res) {    
                     data = JSON.parse(res);
+                    let registerUser = data['user'] ? data['user'] + ` (id: ` + data['id_user'] + `)` : "";
                     html = `<table class="table modalTable">
                                 <tbody>
                                     <tr>
@@ -104,12 +105,16 @@ function openModal(type,idModal,id) {
                                         <td>`+data['estatus']+`</td>
                                     </tr>
                                     <tr>
+                                        <th>Usuario que registró</th>
+                                        <td>`+registerUser+`</td>
+                                    </tr>
+                                    <tr>
                                         <th>Fecha de creación</th>
                                         <td>`+data['timestamp_create']+`</td>
                                     </tr>
                                     <tr>
                                         <th>Última actualización</th>
-                                        <td>`+data['timestamp_update']+`</td>
+                                        <td>`+(data['timestamp_update'] ?? '')+`</td>
                                     </tr>
                                 </tbody>
                             </table>`;

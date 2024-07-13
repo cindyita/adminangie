@@ -51,8 +51,9 @@ function registerUser(){
         if (!empty($data) && count($data)>0) {
 
             $idCompany = $_SESSION['MYSESSION']['company']['id'];
+            $idUser = $_SESSION['MYSESSION']['id'];
             $pass = password_hash($data['pass'], PASSWORD_DEFAULT);
-            $row = $db->query("INSERT INTO sys_user(name,email,password,id_role,status,id_company) VALUES (:name,:email,:pass,:id_role,:status,:id_company)",[":name"=>$data['name'],":email"=>$data['email'],":pass"=>$pass,":id_role"=>$data['id_role'],":status"=>$data['status'],":id_company"=>$idCompany]);
+            $row = $db->query("INSERT INTO sys_user(name,email,password,id_role,status,id_user,id_company) VALUES (:name,:email,:pass,:id_role,:status,:id_user,:id_company)",[":name"=>$data['name'],":email"=>$data['email'],":pass"=>$pass,":id_role"=>$data['id_role'],":status"=>$data['status'],":id_user"=>$idUser,":id_company"=>$idCompany]);
             if($row == []){
                 $response = 1;
             }else{

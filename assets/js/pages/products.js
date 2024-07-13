@@ -101,7 +101,7 @@ function openModal(type,idModal,id) {
                                     </tr>
                                     <tr>
                                         <th>Stock</th>
-                                        <td>`+data['stock']+`</td>
+                                        <td>`+(data['stock'] ?? '')+`</td>
                                     </tr>
                                     <tr>
                                         <th>Disponibilidad:</th>
@@ -112,12 +112,16 @@ function openModal(type,idModal,id) {
                                         <td>`+contacto+`</td>
                                     </tr>
                                     <tr>
+                                        <th>Usuario que registró</th>
+                                        <td>`+data['user']+` (id: `+data['id_user']+`)</td>
+                                    </tr>
+                                    <tr>
                                         <th>Fecha de creación</th>
                                         <td>`+data['timestamp_create']+`</td>
                                     </tr>
                                     <tr>
                                         <th>Última actualización</th>
-                                        <td>`+data['timestamp_update']+`</td>
+                                        <td>`+(data['timestamp_update'] ?? '')+`</td>
                                     </tr>
                                 </tbody>
                             </table>`;

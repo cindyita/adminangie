@@ -134,7 +134,7 @@ function openModal(type,idModal,id) {
                                     </tr>
                                     <tr>
                                         <th>Usuario que registró</th>
-                                        <td>`+ data['user'] + `</td>
+                                        <td>`+data['user']+` (id: `+data['id_user']+`)</td>
                                     </tr>
                                     <tr>
                                         <th>Fecha de creación</th>
@@ -142,7 +142,7 @@ function openModal(type,idModal,id) {
                                     </tr>
                                     <tr>
                                         <th>Última actualización</th>
-                                        <td>`+ data['timestamp_update'] + `</td>
+                                        <td>`+(data['timestamp_update'] ?? '')+`</td>
                                     </tr>
                                 </tbody>
                             </table>`;
