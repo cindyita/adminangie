@@ -304,6 +304,21 @@ function notJustNumbers(input) {
     }
 }
 
+function searchDataResultsOption(optionId, optionText, idInputText, idInputHidden, idSugDataResults) {
+    console.log(optionId);
+    $("#"+idSugDataResults).empty();
+    $("#"+idSugDataResults).addClass('d-none');
+    $("#"+idInputText).val(optionText);
+    $("#"+idInputHidden).val(optionId);
+    $("#" + idInputText).addClass('orange');
+}
+
+function hiddenResults(idSugDataResults) {
+    setTimeout(function() {
+        $("#"+idSugDataResults).addClass('d-none');
+    }, 100);
+}
+
 function intelligentSearch(idInputHidden, idInputText, idSugData = 'sug-data', idSugDataResults = 'sug-data-results', numMinWords = 3) {
     
     $("#"+idInputText).removeClass('orange');
@@ -314,7 +329,9 @@ function intelligentSearch(idInputHidden, idInputText, idSugData = 'sug-data', i
 
     $("#"+idSugDataResults).addClass('d-none');
 
-    if (searchText != "" && searchText.length >= numMinWords) {
+  if (searchText != "" && searchText.length >= numMinWords) {
+      
+    console.log(searchText);
 
       $("#" + idSugData + " option").each(function () {
             
@@ -329,23 +346,7 @@ function intelligentSearch(idInputHidden, idInputText, idSugData = 'sug-data', i
             }
         });
     }
-    // $("#" + idInputHidden).val($("#" + idInputText).val());
 }
-
-function searchDataResultsOption(optionId, optionText, idInputText, idInputHidden, idSugDataResults) {
-    $("#"+idSugDataResults).empty();
-    $("#"+idSugDataResults).addClass('d-none');
-    $("#"+idInputText).val(optionText);
-    $("#"+idInputHidden).val(optionId);
-    $("#" + idInputText).addClass('orange');
-}
-
-function hiddenResults(idSugDataResults) {
-    setTimeout(function() {
-        $("#"+idSugDataResults).addClass('d-none');
-    }, 100);
-}
-
 
 function number(amount) {
     return  parseFloat(amount.replace(/[^0-9.]/g, ''));

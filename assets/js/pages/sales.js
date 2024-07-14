@@ -273,7 +273,9 @@ function intelligentSearchQuery(idInputHidden, idInputText, idSugDataResults = '
 
   const searchText = $("#"+idInputText).val().toLowerCase();
 
-  if (searchText != "" && searchText.length >= numMinWords) {
+    if (searchText != "" && searchText.length >= numMinWords) {
+      
+        console.log(searchText);
 
       $("#" + idSugDataResults).removeClass('d-none');
       $("#" + idSugDataResults).html('<div class="spinner-border spinner-border-sm"></div>');
@@ -304,7 +306,8 @@ function intelligentSearchQuery(idInputHidden, idInputText, idSugDataResults = '
   $("#" + idInputHidden).val($("#" + idInputText).val());
 }
 
-function searchDataResultsOptionQuery(optionId, optionText, idInputText, idInputHidden, idSugDataResults,price) {
+function searchDataResultsOptionQuery(optionId, optionText, idInputText, idInputHidden, idSugDataResults, price) {
+    console.log(optionId);
   $("#"+idSugDataResults).empty();
   $("#"+idSugDataResults).addClass('d-none');
   $("#"+idInputText).val(optionText);
