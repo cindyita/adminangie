@@ -25,6 +25,9 @@ if (!empty(getView())) {
         case 'INTELLIGENTSEARCH':
             searchProducts();
         break;
+        case 'ALLPRODUCTSSEARCH':
+            allProductSearch();
+        break;
         default:
             echo json_encode("No se definió una acción");
         break;
@@ -151,5 +154,11 @@ function searchProducts(){
     } else {
         $row = [];
     }
+    echo json_encode($row);
+}
+
+function allProductSearch(){
+    $db = new QueryModel();
+    $row = $db->query("SELECT id, name, price FROM reg_product", []);
     echo json_encode($row);
 }

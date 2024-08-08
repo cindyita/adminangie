@@ -31,3 +31,4 @@
         <a href="settings"><i class="fa-solid fa-gear"></i><span>Ajustes</span></a>
     </li>
 <?php } ?>
+<br><br>

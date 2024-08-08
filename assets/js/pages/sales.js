@@ -295,8 +295,9 @@ function intelligentSearchQuery(idInputHidden, idInputText, idSugDataResults = '
               $("#" + idSugDataResults).append($("<div onclick='searchDataResultsOptionQuery(" + optionId + ",\"" + optionText + "\",\"" + idInputText + "\", \"" + idInputHidden + "\", \"" + idSugDataResults + "\","+price+")'>").html('<div class="option-result py-2 px-3">' + optionText + ' [$'+price+']</div>'));
             });
           } else {
-            $("#"+idSugDataResults).addClass('d-none');
-          }
+            // $("#"+idSugDataResults).addClass('d-none');
+            }
+            $("#" + idSugDataResults).append($("<div onclick='searchAllProductsQuery(\"" + idInputText + "\", \"" + idInputHidden + "\", \"" + idSugDataResults + "\")'>").html('<div class="option-result py-2 px-3 text-secondary">Ver todos los productos <i class="fa-solid fa-magnifying-glass"></i></div>'));
             
         }).catch(function(error) {
             console.error(error);
@@ -304,6 +305,34 @@ function intelligentSearchQuery(idInputHidden, idInputText, idSugDataResults = '
 
   }
   $("#" + idInputHidden).val($("#" + idInputText).val());
+}
+
+function searchAllProductsQuery(idInputText2,idInputHidden2,idSugDataResults2){
+    $("#" + idSugDataResults2).html('<div class="spinner-border spinner-border-sm"></div>');
+
+    sendAjax({}, 'ALLPRODUCTSSEARCH').then(
+        function (res2) {
+          var data2 = JSON.parse(res2);
+          if (data2) {
+            // $("#" + idSugDataResults2).html('');
+            let optionText2 = '';
+            let optionId2 = '';
+            let price2 = 0;
+            data2.forEach(element => {
+                console.log(element);
+              optionText2 = element['name'];
+              optionId2 = element['id'];
+              price2 = element['price'];
+              $("#" + idSugDataResults2).append($("<div onclick='searchDataResultsOptionQuery(" + optionId2 + ",\"" + optionText2 + "\",\"" + idInputText2 + "\", \"" + idInputHidden2 + "\", \"" + idSugDataResults2 + "\","+price2+")'>").html('<div class="option-result py-2 px-3">' + optionText2 + ' [$'+price2+']</div>'));
+            });
+          } else {
+            $("#"+idSugDataResults2).append('No se encontraron los productos');
+          }
+        //   $("#" + idSugDataResults2).append($("<div onclick='searchAllProductsQuery(\"" + idInputText2 + "\", \"" + idInputHidden2 + "\", \"" + idSugDataResults2 + "\")'>").html('<div class="option-result py-2 px-3 text-secondary">Ver todos los productos <i class="fa-solid fa-magnifying-glass"></i></div>'));
+            
+        }).catch(function(error) {
+            console.error(error);
+        });
 }
 
 function searchDataResultsOptionQuery(optionId, optionText, idInputText, idInputHidden, idSugDataResults, price) {

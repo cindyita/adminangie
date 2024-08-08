@@ -67,8 +67,8 @@ i {
 }
 /*----------MENU----------*/
 .logo {
-  width: 170px;
-  padding: 30px 0;
+  width: 120px;
+  padding: 5px 0;
 }
 .logo a {
   width: 100%;
@@ -175,6 +175,7 @@ i {
 
 .metismenu {
   padding-left: 10px;
+  padding-bottom: 30px;
 }
 
 .metismenu > li > a {
@@ -187,7 +188,7 @@ i {
   color: var(--textSecondary);
   font-size: calc(17px + var(--fontPlusSize));
   text-transform: capitalize;
-  padding: 15px 10px;
+  padding: 12px 10px;
   letter-spacing: 0;
   font-weight: 400;
 }
@@ -252,7 +253,7 @@ i {
 /*--- END Sidebar ----*/
 /*---- Header Area ----*/
 .header-area {
-  padding: 15px 30px;
+  padding: 10px 30px;
   background: var(--fontSecondary);
   border-bottom: 1px solid lightgrey;
 }
@@ -327,8 +328,8 @@ i {
 /*-----USER----*/
 .img-profile {
   max-height: 100%;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 100px;
   border: 1px solid lightgrey;
   cursor: pointer;
@@ -375,7 +376,7 @@ i {
 }
 
 .maxmin li > i {
-  font-size: calc(35px + var(--fontPlusSize));
+  font-size: calc(25px + var(--fontPlusSize));
   color: #bdbcbc;
   vertical-align: middle;
   cursor: pointer;

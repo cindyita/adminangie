@@ -107,6 +107,7 @@ class PagesController
         $db = new QueryModel();
         $categories = $db->select("reg_category","id_company = $idcompany AND type = 'P'");
         $contacts = $db->select("reg_contact","id_company = $idcompany");
+        //REVISAR $contacts
         require_once "./src/views/pages/products.php";
     }
 
