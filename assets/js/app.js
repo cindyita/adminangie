@@ -1,6 +1,7 @@
 const ACTUALPAGE = actualPage();
 const CONTROLLER = pageController();
 
+let stopHiddenResults = 0;
 
 $(function () {
 
@@ -80,7 +81,7 @@ function processError(res) {
     return false;
     default:
       message("Error desconocido", "error");
-      console.log("Error: "+res);
+      console.log(res);
       return false;
   }
 }
@@ -314,9 +315,11 @@ function searchDataResultsOption(optionId, optionText, idInputText, idInputHidde
 }
 
 function hiddenResults(idSugDataResults) {
-    setTimeout(function() {
-        $("#"+idSugDataResults).addClass('d-none');
-    }, 100);
+  setTimeout(function () {
+    if (!stopHiddenResults) {
+      $("#" + idSugDataResults).addClass('d-none');
+    }
+  }, 200);
 }
 
 function intelligentSearch(idInputHidden, idInputText, idSugData = 'sug-data', idSugDataResults = 'sug-data-results', numMinWords = 3) {
@@ -346,6 +349,11 @@ function intelligentSearch(idInputHidden, idInputText, idSugData = 'sug-data', i
             }
         });
     }
+}
+
+function showModal(idModal) {
+    var modalEvent = new bootstrap.Modal(document.getElementById(idModal));
+    modalEvent.show();
 }
 
 function number(amount) {

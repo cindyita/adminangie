@@ -46,6 +46,9 @@
 i {
   font-size: calc(12pt + var(--fontPlusSize));
 }
+a {
+  color: var(--secondary);
+}
 .main-content {
   width: 100%;
   height: 100%;
@@ -454,6 +457,10 @@ a .text-secondary:hover i{
   img {
     width: 100%;
   }
+}
+.fc-h-event {
+  background-color: var(--primary);
+  border: 1px solid var(--primary);
 }
 /*-----------OBJETOS----------*/
 .line {

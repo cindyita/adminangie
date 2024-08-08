@@ -267,6 +267,7 @@ function clearSaleTable() {
 
 
 function intelligentSearchQuery(idInputHidden, idInputText, idSugDataResults = 'sug-data-results', numMinWords = 3) {
+    console.log("searching");
     
   $("#"+idInputText).removeClass('orange');
   $("#"+idInputHidden).val("");
@@ -274,8 +275,6 @@ function intelligentSearchQuery(idInputHidden, idInputText, idSugDataResults = '
   const searchText = $("#"+idInputText).val().toLowerCase();
 
     if (searchText != "" && searchText.length >= numMinWords) {
-      
-        console.log(searchText);
 
       $("#" + idSugDataResults).removeClass('d-none');
       $("#" + idSugDataResults).html('<div class="spinner-border spinner-border-sm"></div>');
@@ -295,6 +294,7 @@ function intelligentSearchQuery(idInputHidden, idInputText, idSugDataResults = '
               $("#" + idSugDataResults).append($("<div onclick='searchDataResultsOptionQuery(" + optionId + ",\"" + optionText + "\",\"" + idInputText + "\", \"" + idInputHidden + "\", \"" + idSugDataResults + "\","+price+")'>").html('<div class="option-result py-2 px-3">' + optionText + ' [$'+price+']</div>'));
             });
           } else {
+            $("#" + idSugDataResults).html('');
             // $("#"+idSugDataResults).addClass('d-none');
             }
             $("#" + idSugDataResults).append($("<div onclick='searchAllProductsQuery(\"" + idInputText + "\", \"" + idInputHidden + "\", \"" + idSugDataResults + "\")'>").html('<div class="option-result py-2 px-3 text-secondary">Ver todos los productos <i class="fa-solid fa-magnifying-glass"></i></div>'));
@@ -303,32 +303,35 @@ function intelligentSearchQuery(idInputHidden, idInputText, idSugDataResults = '
             console.error(error);
         });
 
-  }
-  $("#" + idInputHidden).val($("#" + idInputText).val());
+    }
+    $("#" + idSugDataResults).html('');
+    $("#" + idInputHidden).val($("#" + idInputText).val());
 }
 
-function searchAllProductsQuery(idInputText2,idInputHidden2,idSugDataResults2){
+function searchAllProductsQuery(idInputText2, idInputHidden2, idSugDataResults2) {
+
+    stopHiddenResults = 1;
+
     $("#" + idSugDataResults2).html('<div class="spinner-border spinner-border-sm"></div>');
 
     sendAjax({}, 'ALLPRODUCTSSEARCH').then(
         function (res2) {
           var data2 = JSON.parse(res2);
           if (data2) {
-            // $("#" + idSugDataResults2).html('');
+            $("#" + idSugDataResults2).html('');
             let optionText2 = '';
             let optionId2 = '';
             let price2 = 0;
             data2.forEach(element => {
                 console.log(element);
-              optionText2 = element['name'];
-              optionId2 = element['id'];
-              price2 = element['price'];
-              $("#" + idSugDataResults2).append($("<div onclick='searchDataResultsOptionQuery(" + optionId2 + ",\"" + optionText2 + "\",\"" + idInputText2 + "\", \"" + idInputHidden2 + "\", \"" + idSugDataResults2 + "\","+price2+")'>").html('<div class="option-result py-2 px-3">' + optionText2 + ' [$'+price2+']</div>'));
+                optionText2 = element['name'];
+                optionId2 = element['id'];
+                price2 = element['price'];
+                $("#" + idSugDataResults2).append($("<div onclick='searchDataResultsOptionQuery(" + optionId2 + ",\"" + optionText2 + "\",\"" + idInputText2 + "\", \"" + idInputHidden2 + "\", \"" + idSugDataResults2 + "\","+price2+")'>").html('<div class="option-result py-2 px-3">' + optionText2 + ' [$'+price2+']</div>'));
             });
           } else {
             $("#"+idSugDataResults2).append('No se encontraron los productos');
           }
-        //   $("#" + idSugDataResults2).append($("<div onclick='searchAllProductsQuery(\"" + idInputText2 + "\", \"" + idInputHidden2 + "\", \"" + idSugDataResults2 + "\")'>").html('<div class="option-result py-2 px-3 text-secondary">Ver todos los productos <i class="fa-solid fa-magnifying-glass"></i></div>'));
             
         }).catch(function(error) {
             console.error(error);
@@ -336,15 +339,16 @@ function searchAllProductsQuery(idInputText2,idInputHidden2,idSugDataResults2){
 }
 
 function searchDataResultsOptionQuery(optionId, optionText, idInputText, idInputHidden, idSugDataResults, price) {
-    console.log(optionId);
-  $("#"+idSugDataResults).empty();
-  $("#"+idSugDataResults).addClass('d-none');
-  $("#"+idInputText).val(optionText);
-  $("#"+idInputHidden).val(optionId);
-  $("#" + idInputText).addClass('orange');
-  $("#" + idInputHidden).data("price", price);
 
-  calculateTotal();
+    stopHiddenResults = 0;
+    $("#"+idSugDataResults).empty();
+    $("#"+idSugDataResults).addClass('d-none');
+    $("#"+idInputText).val(optionText);
+    $("#"+idInputHidden).val(optionId);
+    $("#" + idInputText).addClass('orange');
+    $("#" + idInputHidden).data("price", price);
+
+    calculateTotal();
 }
 
 function calculateTotal() {

@@ -1,3 +1,4 @@
+let dataEvents = [];
 $(function () {
 
     $.ajax({
@@ -9,44 +10,15 @@ $(function () {
             $('#random-quote').html('Bienvenid@');
         }
     });
-
-    var calendarElement = document.getElementById('calendarHome');
-    var calendar = new FullCalendar.Calendar(calendarElement, {
-        initialView: 'dayGridMonth',
-        locale: 'es',
-        timeZone: 'UTC-7',
-        customButtons: {
-            myCustomButton: {
-            text: 'Crear evento',
-            click: function() {
-                
-            }
-            }
-        },
-        headerToolbar: {
-            left: 'prev,next today myCustomButton',
-            center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay'
-        },
-        events: [
-            {
-                id: 'a1',
-                title: 'Pedido prueba',
-                start: '2024-07-01',
-                end: '2024-07-05',
-                // startRecur:,
-                // endRecur:,
-                // daysOfWeek:
-                // startTime:'02:00',
-                // endTime:'04:00',
-                backgroundColor: 'var(--secondary)',
-                borderColor: 'var(--secondary)',
-                textColor: 'white',
-            // url:'home'
-            }
-        ]
+    
+    sendAjax({}, 'GETEVENTS').then(
+        function (res) {
+            dataEvents = JSON.parse(res);
+            loadCalendar('calendarHome',dataEvents);
+    }).catch(function(error) {
+        console.error(error);
     });
-    calendar.render();
+
 
     sendAjax({}, 'GETNOTE').then(
         function (res) { 
@@ -59,7 +31,7 @@ $(function () {
 
     $("#homeNotes").on("submit", async function (event) {
         event.preventDefault();
-        var formData = new FormData($(this)[0]);
+        let formData = new FormData($(this)[0]);
         sendAjaxForm(formData, 'SAVENOTE').then(
             function (res) {
                 if (processError(res)) {
@@ -70,5 +42,51 @@ $(function () {
                 console.error(error);
             });
     });
+
+    $("#addEventForm").on("submit", async function (event) {
+        event.preventDefault();
+        let formData = new FormData($("#addEventForm")[0]);
+        sendAjaxForm(formData, 'CREATEEVENT').then(
+            function (res) {
+                console.log(res);
+                if (processError(res)) {
+                    message("El evento fue creado correctamente", "success");
+                    $("#addEventForm")[0].reset();
+                    // loadCalendar('calendarHome',dataEvents);
+                    window.location.reload();
+                }
+            }).catch(function (error) {
+                message("Algo salió mal", "error");
+                console.error(error);
+            });
+    });
     
 });
+
+function loadCalendar(idCalendar,dataEvents) {
+    $("#loadEvents").show();
+    $("#" + idCalendar).empty();
+    let calendarElement = document.getElementById(idCalendar);
+    let calendar = new FullCalendar.Calendar(calendarElement, {
+        initialView: 'dayGridMonth',
+        locale: 'es',
+        timeZone: 'UTC-7',
+        customButtons: {
+            myCustomButton: {
+            text: 'Crear evento',
+                click:
+                    function () {
+                        showModal('addEvent');
+                    }
+            }
+        },
+        headerToolbar: {
+            left: 'prev,next today myCustomButton',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        events: dataEvents
+    });
+    calendar.render();
+    $("#loadEvents").hide();
+}

@@ -109,7 +109,7 @@ $newContact = '<div>
                 </div>';
  echo modal('editContact', 'Editar contacto', $editContact);
 
-  $deleteContact = '<div>
+$deleteContact = '<div>
                     <h5>¿Segur@ que quieres borrar el contacto con id: <span id="idDeleteText"></span>?</h5>
                     <form method="post" id="deleteContactForm">
                         <input type="hidden" name="id" id="idDelete">
